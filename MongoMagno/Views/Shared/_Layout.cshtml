@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body data-ng-app="mongoMagno">
+    <header>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <span class="brand">MongoMagno</span>
+                <ul class="nav">
+                </ul>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    @Scripts.Render("~/Scripts/bottomscripts")
+    @RenderSection("bottom", required: false)
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tests</title>
+    <script src="jasmine/jasmine.js"></script>
+    <script src="jasmine/jasmine-html.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-strap.js"></script>
+    <script src="../Scripts/angular-mocks.js"></script>
+    <script src="../Scripts/mongoMagno.js"></script>
+    <link href="jasmine/jasmine.css" rel="stylesheet" />
+</head>
+<body>
+
+    <script>
+       
+        describe("mongoMagno", function () {
+
+            beforeEach(module('mongoMagno'));
+
+            describe('MainController', function () {
+
+                var fakeModal = {
+                    command: null,
+                    modal: function (command) {
+                        this.command = command;
+                    }
+                };
+
+                var fakeModalPromise = {
+                    then: function (callback) {
+                        callback(fakeModal);
+                    }
+                };
+                
+                var $modal, scope;
+                beforeEach(angular.mock.inject(function ($rootScope, $controller) {
+                    fakeModal.command = null;
+                    $modal = jasmine.createSpy("$modal").andReturn(fakeModalPromise);
+                    scope = $rootScope.$new();
+                    $controller('MainController', {
+                        $scope: scope,
+                        $modal: $modal
+                    });
+                }));
+
+                it("should show connect dialog when launched", function () {
+                    expect(fakeModal.command).toBe("show");
+                });
+                
+                it("should connect to server when dialog accepted", function () {
+                    expect(false).toBe(true);
+                });
+                
+                it("should not connect when dialog canceled", function () {
+                    expect(false).toBe(true);
+                });
+                
+                it("should keep connected server in an mru list", function () {
+                    expect(false).toBe(true);
+                });
+               
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        (function () {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var trivialReporter = new jasmine.TrivialReporter();
+
+            jasmineEnv.addReporter(trivialReporter);
+
+            jasmineEnv.specFilter = function (spec) {
+                return trivialReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                execJasmine();
+            };
+
+            function execJasmine() {
+                jasmineEnv.execute();
+            }
+
+        })();
+    </script>
+</body>
+</html>

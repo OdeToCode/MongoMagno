@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMagno", "MongoMagno\MongoMagno.csproj", "{C5DE7B47-3FEC-4CB4-9ED2-D870244E9563}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMagno.Tests", "MongoMagno.Tests\MongoMagno.Tests.csproj", "{55A60737-65B0-457B-B01B-86A83FFCE5A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5DE7B47-3FEC-4CB4-9ED2-D870244E9563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DE7B47-3FEC-4CB4-9ED2-D870244E9563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DE7B47-3FEC-4CB4-9ED2-D870244E9563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DE7B47-3FEC-4CB4-9ED2-D870244E9563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A60737-65B0-457B-B01B-86A83FFCE5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A60737-65B0-457B-B01B-86A83FFCE5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A60737-65B0-457B-B01B-86A83FFCE5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A60737-65B0-457B-B01B-86A83FFCE5A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,18 @@
+﻿<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3>Connect</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <label>Server and port</label>
+        <input type="text" ng-model="server.name" />
+        <label>Username</label>
+        <input type="text" ng-model="server.username"/>
+        <label>Password</label>
+        <input type="password" ng-model="server.password"/>        
+    </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn" ng-click="hide()">Close</button>
+  <button class="btn btn-primary" ng-click="connect(server);hide()">Connect</button>
+</div>
