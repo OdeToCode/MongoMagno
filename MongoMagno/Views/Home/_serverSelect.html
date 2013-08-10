@@ -1,18 +1,23 @@
 ﻿<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  <h3>Connect</h3>
+    <h3>Connect</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body row-fluid">
     <form>
-        <label>Server and port</label>
-        <input type="text" ng-model="server.name" />
-        <label>Username</label>
-        <input type="text" ng-model="server.username"/>
-        <label>Password</label>
-        <input type="password" ng-model="server.password"/>        
+        <div class="span6">
+            <label>Server and port</label>
+            <input type="text" data-ng-model="server.name" />
+            <label>Username</label>
+            <input type="text" data-ng-model="server.username" />
+            <label>Password</label>
+            <input type="password" data-ng-model="server.password" />
+        </div>
+        <div class="span6">
+            <label>Recently used servers:</label>
+            <select data-ng-model="server.name" data-ng-options="s for s in servers"></select>
+        </div>
     </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn" ng-click="hide()">Close</button>
-  <button class="btn btn-primary" ng-click="connect(server);hide()">Connect</button>
+    <button type="button" class="btn" data-ng-click="close()">Close</button>
+    <button class="btn btn-primary" data-ng-click="close(true)">Connect</button>
 </div>

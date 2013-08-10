@@ -16,7 +16,8 @@ namespace MongoMagno
                             .Include("~/Scripts/jquery.js")
                             .Include("~/Scripts/bootstrap.js")
                             .Include("~/Scripts/angular.js")
-                            .Include("~/Scripts/angular-strap.js")
+                            .Include("~/Scripts/ui-bootstrap.js")
+                            .Include("~/Scripts/format.js")
                             .Include("~/Scripts/mongoMagno.js"));
         }
     }

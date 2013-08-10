@@ -5,7 +5,7 @@
     <script src="jasmine/jasmine.js"></script>
     <script src="jasmine/jasmine-html.js"></script>
     <script src="../Scripts/angular.js"></script>
-    <script src="../Scripts/angular-strap.js"></script>
+    <script src="../Scripts/ui-bootstrap.js"></script>
     <script src="../Scripts/angular-mocks.js"></script>
     <script src="../Scripts/mongoMagno.js"></script>
     <link href="jasmine/jasmine.css" rel="stylesheet" />
@@ -20,33 +20,31 @@
 
             describe('MainController', function () {
 
-                var fakeModal = {
-                    command: null,
-                    modal: function (command) {
-                        this.command = command;
-                    }
+                var scope;
+                var opened;
+                var fakePromise = {
+                    then: function () {}  
                 };
-
-                var fakeModalPromise = {
-                    then: function (callback) {
-                        callback(fakeModal);
-                    }
+                var fakeDialog = {
+                    open: function () {
+                        opened = true;
+                        return fakePromise;
+                    }  
                 };
-                
-                var $modal, scope;
-                beforeEach(angular.mock.inject(function ($rootScope, $controller) {
-                    fakeModal.command = null;
-                    $modal = jasmine.createSpy("$modal").andReturn(fakeModalPromise);
+                beforeEach(inject(function ($rootScope, $controller, $dialog) {
+                    opened = false;
                     scope = $rootScope.$new();
-                    $controller('MainController', {
+                    spyOn($dialog, "dialog").andReturn(fakeDialog);
+                    
+                    $controller("MainController", {
                         $scope: scope,
-                        $modal: $modal
+                        $dialog: $dialog
                     });
                 }));
 
-                it("should show connect dialog when launched", function () {
-                    expect(fakeModal.command).toBe("show");
-                });
+                it("should show connect dialog when launched", function() {
+                    expect(opened).toBe(true);
+                });           
                 
                 it("should connect to server when dialog accepted", function () {
                     expect(false).toBe(true);
@@ -55,11 +53,47 @@
                 it("should not connect when dialog canceled", function () {
                     expect(false).toBe(true);
                 });
-                
-                it("should keep connected server in an mru list", function () {
-                    expect(false).toBe(true);
+                                            
+            });
+
+            describe("SelectServerController", function() {
+
+                var scope;
+                var fakeStorage;
+                var dialog;
+
+                beforeEach(inject(function ($rootScope, $controller) {
+                    jasmine.createSpyObj("dialog", ["close"]);
+                    fakeStorage = {
+                        recentServers: ["test1", "test2", "test3", "test4", "test5"],
+                        getLocal: function (key) { return this[key]; },
+                        setLocal: function (key, value) { this[key] = value; }
+                    };
+                    scope = $rootScope.$new();                    
+                    $controller("SelectServerController", {
+                        $scope: scope,
+                        webStorage: fakeStorage,
+                        dialog: dialog                        
+                    });
+                }));
+
+                it("should load recent server names from storage", function() {
+                    expect(scope.servers).toBe(fakeStorage.recentServers);
                 });
-               
+
+                it("should save server in recent names when connecting", function() {
+                    scope.server.name = "somemachinename";
+                    scope.close(true);
+                    expect(fakeStorage.recentServers[0]).toBe(scope.server.name);
+                });
+
+                it("should show last connected server when appearing", function() {
+                    expect(scope.server.name).toBe(fakeStorage.recentServers[0]);
+                });
+
+                it("should limit the recent server list to 5", function () {
+                    expect(fakeStorage.recentServers.length).toBe(5);
+                });                               
             });
         });
 

@@ -1,29 +1,71 @@
-﻿(function() {
+﻿(function () {
+
     "use strict";
-    var app = angular.module("mongoMagno", ["$strap"]);
-    
+    var app = angular.module("mongoMagno", ["ui.bootstrap", "ui.bootstrap.transition"]);
+
+    app.config(function ($dialogProvider) {
+        $dialogProvider.options({ backdropClick: false, dialogFade: true });        
+    });
+    app.constant("apiRootUrl", "/api");
+    app.config.$inject = ["$dialogProvider"];
+
 }());
 
 (function(app) {
+
+    var mongoApiServer = function($http, apiRootUrl) {
+
+        var getHeaders = function(server) {
+            var headers = {};
+            if (server && server.username) {
+                headers["X-MMUsername"] = server.username;
+            }
+            if (server && server.password) {
+                headers["X-MMPassword"] = server.password;
+            }
+            return headers;
+        };
+
+        var getServer = function(server) {
+            var url = String.format("{0}/server/{1}", apiRootUrl, server.name);            
+            var headers = getHeaders(server);
+            return $http.get(url, {
+                headers: headers
+            });
+        };
+
+        return {
+            getServer: getServer
+        };
+
+    };
+    mongoApiServer.$inject = ["$http", "apiRootUrl"];
+
+    app.factory("mongoApiServer", mongoApiServer);
+
+}(angular.module("mongoMagno")));
+
+(function (app) {
     "use strict";
 
     var getSession = function (key) {
         return sessionStorage[key];
 
     };
-    var setSession = function(key, value) {
+    var setSession = function (key, value) {
         sessionStorage[key] = value;
     };
 
-    var getLocal = function(key) {
-        return localStorage[key];
+    var getLocal = function (key) {
+        var value = localStorage[key];
+        return value && JSON.parse(value);
     };
 
-    var setLocal = function(key, value) {
-        localStorage[key] = value;
+    var setLocal = function (key, value) {
+        localStorage[key] = JSON.stringify(value);
     };
 
-    var webStorage = function() {
+    var webStorage = function () {
         return {
             getSession: getSession,
             setSession: setSession,
@@ -37,39 +79,56 @@
 
 }(angular.module("mongoMagno")));
 
-(function (app) {   
+(function (app) {
     "use strict";
 
-    var server = function() {
-        return {
-            name: "localhost:27017",
-            username: "",
-            password: ""
+    var serverSelectDialogOptions = {
+        templateUrl: "/views/home/_serverSelect.html",
+        controller: "SelectServerController"
+    };
+
+    var SelectServerController = function ($scope, webStorage, dialog) {
+        
+        $scope.servers = webStorage.getLocal("recentServers") || [];        
+        $scope.server = {
+            name: $scope.servers.length ? $scope.servers[0] : ""
+        };
+        $scope.close = function (ok) {
+            var result = undefined;
+            if (ok && $scope.server.name) {
+                result = $scope.server;
+                $scope.servers.unshift($scope.server.name);
+                webStorage.setLocal("recentServers", $scope.servers);
+            }
+            dialog.close(result);
         };
     };
 
-    var selectServerDialog;
-    var getSelectServerDialog = function($modal, $scope) {
-        return $modal({ template: '/views/home/_serverSelect.html', persist: true, show: false, scope: $scope });
-    };
+    var MainController = function ($scope, $dialog, mongoApiServer) {
 
-    var showSelectServerDialog = function () {
-        selectServerDialog.then(function (modal) { modal.modal("show"); });
-    };
+        $scope.selectServer = function() {
+            $dialog
+                .dialog(serverSelectDialogOptions)
+                .open()
+                .then(function (result) { $scope.connectToServer(result); });
+        };
 
-    var connect = function(server) {
-
-    };
-
-    var MainController = function ($scope, $modal) {
-        selectServerDialog = getSelectServerDialog($modal, $scope);
-        $scope.selectServer = showSelectServerDialog;
-        $scope.server = server();
+        $scope.connectToServer = function(server) {
+            if (server) {
+                $scope.currentServer = server;
+                mongoApiServer
+                    .getServer($scope.currentServer)
+                    .then(function(result) { $scope.databases = result });
+            }
+        };
 
         $scope.selectServer();
     };
-    MainController.$inject = ["$scope", "$modal"];
 
-    app.controller("MainController", MainController);
+    SelectServerController.$inject = ["$scope", "webStorage", "dialog"];
+    MainController.$inject = ["$scope", "$dialog", "mongoApiServer"];
 
+    app.controller("MainController", MainController)
+       .controller("SelectServerController", SelectServerController);
+    
 }(angular.module("mongoMagno")));
