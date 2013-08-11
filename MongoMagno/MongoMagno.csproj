@@ -166,7 +166,6 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\cultures.js" />
     <Content Include="Scripts\format.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\mongoMagno\mainController.js" />
