@@ -1,7 +1,12 @@
 ﻿<div data-ng-controller="MainController">
-    <div>Current server: {{ currentServer.name }}</div>
-    <div><button class="btn btn-mini" data-ng-click="selectServer()">Change Server</button></div>
-    <ul>
-        <li data-ng-repeat="database in databases">{{database}}</li>
-    </ul>
+    <div>
+        <button class="btn btn-mini" data-ng-click="selectServer()">Change Server</button>
+    </div>
+    <div>
+        Current server:{{ currentServer.name }}
+    </div>
+    <div>
+        <label>Current Database: </label>
+        <select data-ng-model="currentServer.currentDatabase" data-ng-options="db for db in databases"></select>
+    </div>
 </div>

@@ -56,6 +56,13 @@
                     expect(scope.databases.length).toBe(3);
                 });
                 
+                it("should set current server and database", function () {
+                    scope.$apply(function () { dialogDefer.resolve({ name: "fooserver" }); });
+                    httpBackend.flush();
+                    expect(scope.currentServer.name).toBe("fooserver");
+                    expect(scope.currentServer.currentDatabase).toBe("dba");
+                });
+
                 it("should not connect when dialog canceled", function () {                  
                     scope.$apply(function () { dialogDefer.resolve(undefined); });
                     expect(scope.databases).toBe(undefined);

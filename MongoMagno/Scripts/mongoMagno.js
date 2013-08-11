@@ -106,9 +106,10 @@
 
     var MainController = function ($scope, $dialog, mongoApiServer) {
 
-        var setDatabases = function(databases) {
+        var setDatabases = function (databases) {
             $scope.databases = databases.data;
-        };
+            $scope.currentServer.currentDatabase = $scope.databases[0];
+        };       
 
         var connectToServer = function (server) {
             if (server) {
