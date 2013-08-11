@@ -38,6 +38,7 @@
                     httpBackend = $httpBackend;
                     spyOn($dialog, "dialog").andReturn(fakeDialog);
                     $httpBackend.when("GET", "/api/server/fooserver").respond(["dba", "dbb", "dbc"]);
+                    $httpBackend.when("GET", "/api/server/fooserver/dba").respond(["c1", "c2", "c3"]);
 
                     $controller("MainController", {
                         $scope: scope,
@@ -53,7 +54,7 @@
                 it("should connect to server when dialog accepted", function () {
                     scope.$apply(function () { dialogDefer.resolve({ name: "fooserver" }); });
                     httpBackend.flush();
-                    expect(scope.databases.length).toBe(3);
+                    expect(scope.currentServer.databases.length).toBe(3);
                 });
                 
                 it("should set current server and database", function () {

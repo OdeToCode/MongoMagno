@@ -1,12 +1,27 @@
-﻿<div data-ng-controller="MainController">
-    <div>
-        <button class="btn btn-mini" data-ng-click="selectServer()">Change Server</button>
-    </div>
-    <div>
-        Current server:{{ currentServer.name }}
-    </div>
-    <div>
-        <label>Current Database: </label>
-        <select data-ng-model="currentServer.currentDatabase" data-ng-options="db for db in databases"></select>
+﻿<div class="container-fluid" data-ng-controller="MainController">
+    <div class="row-fluid">
+        <div class="span4">
+            <div>
+                Server: <span class="badge badge-important">{{ currentServer.name }}</span>
+                <button class="btn btn-mini" data-ng-click="selectServer()">Change Server</button>
+            </div>
+            <div>
+                <label>Database: </label>
+                <select data-ng-model="currentServer.currentDatabase"
+                        data-ng-options="db for db in currentServer.databases"
+                        data-ng-change="selectDatabase()" size="10">
+                </select>
+            </div>
+            <div>
+                <label>Collection: </label>
+                <select data-ng-model="currentServer.currentCollection"
+                        data-ng-options="c for c in currentServer.collections"
+                        data-ng-change="selectCollection()" size="10">
+                </select>
+            </div>
+        </div>
+        <div class="span8">
+          
+        </div>
     </div>
 </div>

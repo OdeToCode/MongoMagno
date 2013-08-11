@@ -6,12 +6,19 @@ using MongoMagno.Services;
 namespace MongoMagno.Controllers
 {
     public class ServerController : ApiController
-    {     
+    {         
         [GET("api/server/{server}")]
-        public IEnumerable<string> Get(string server, string username = null, string password = null)
+        public IEnumerable<string> Get(string server)
         {
-            var db = new MongoDb(server, username, password);
+            var db = new MongoDb(server);
             return db.GetDatabaseNames();
-        }       
+        }
+
+        [GET("api/server/{server}/{database}")]
+        public IEnumerable<string> Get(string server, string database)
+        {
+            var db = new MongoDb(server);
+            return db.GetCollections(database);
+        }     
     }
 }

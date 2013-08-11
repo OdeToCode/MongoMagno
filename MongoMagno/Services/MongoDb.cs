@@ -18,6 +18,12 @@ namespace MongoMagno.Services
             return _server.GetDatabaseNames();
         }
 
+        public IEnumerable<string> GetCollections(string database)
+        {
+            var db = _server.GetDatabase(database);
+            return db.GetCollectionNames();
+        }
+            
         MongoServer _server;
     }
 }

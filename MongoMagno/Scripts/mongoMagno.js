@@ -26,16 +26,21 @@
             return headers;
         };
 
-        var getServer = function(server) {
+        var getDatabases = function(server) {
             var url = String.format("{0}/server/{1}", apiRootUrl, server.name);            
             var headers = getHeaders(server);
-            return $http.get(url, {
-                headers: headers
-            });
+            return $http.get(url, { headers: headers });
+        };
+
+        var getCollections = function(server) {
+            var url = String.format("{0}/server/{1}/{2}", apiRootUrl, server.name, server.currentDatabase);
+            var headers = getHeaders(server);
+            return $http.get(url, { headers: headers });
         };
 
         return {
-            getServer: getServer
+            getDatabases: getDatabases,
+            getCollections: getCollections
         };
 
     };
@@ -106,16 +111,22 @@
 
     var MainController = function ($scope, $dialog, mongoApiServer) {
 
+        var setCollections = function(collections) {
+            $scope.currentServer.collections = collections.data;
+            $scope.currentServer.currentCollection = $scope.currentServer.collections[0];
+        };
+
         var setDatabases = function (databases) {
-            $scope.databases = databases.data;
-            $scope.currentServer.currentDatabase = $scope.databases[0];
+            $scope.currentServer.databases = databases.data;
+            $scope.currentServer.currentDatabase = $scope.currentServer.databases[0];
+            selectCollection();
         };       
 
         var connectToServer = function (server) {
             if (server) {
                 $scope.currentServer = server;
                 mongoApiServer
-                    .getServer($scope.currentServer)
+                    .getDatabases($scope.currentServer)
                     .then(setDatabases);
             }
         };
@@ -127,7 +138,18 @@
                 .then(connectToServer);
         };
 
+        var selectCollection = function() {
+            mongoApiServer
+                .getCollections($scope.currentServer)
+                .then(setCollections);
+        };
+
+        var selectDatabase = function() {
+            selectCollection();
+        };
+
         $scope.selectServer = selectServer;
+        $scope.selectDatabase = selectDatabase;
         $scope.selectServer();
     };
 
