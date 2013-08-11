@@ -1,6 +1,6 @@
 ﻿<div class="container-fluid" data-ng-controller="MainController">
     <div class="row-fluid">
-        <div class="span4">
+        <div class="span3">
             <div>
                 Server: <span class="badge badge-info">{{ currentServer.name }}</span>
                 <button class="btn btn-mini" data-ng-click="selectServer()">Change Server</button>
@@ -8,20 +8,31 @@
             <div>
                 <label>Database: </label>
                 <select data-ng-model="currentServer.currentDatabase"
-                        data-ng-options="db for db in currentServer.databases"
-                        data-ng-change="selectDatabase()" size="10">
+                    data-ng-options="db for db in currentServer.databases"
+                    data-ng-change="selectDatabase()" size="10">
                 </select>
             </div>
             <div>
                 <label>Collection: </label>
                 <select data-ng-model="currentServer.currentCollection"
-                        data-ng-options="c for c in currentServer.collections"
-                        data-ng-change="selectCollection()" size="10">
+                    data-ng-options="c for c in currentServer.collections"
+                    data-ng-change="selectCollection()" size="10">
                 </select>
             </div>
         </div>
-        <div class="span8">
-          
+        <div class="span9">
+            <ul class="nav nav-tabs">
+                <li><a href="#find" data-toggle="tab">Find</a></li>
+                <li><a href="#update" data-toggle="tab">Update</a></li>
+                <li><a href="#remove" data-toggle="tab">Remove</a></li>
+                <li><a href="#command" data-toggle="tab">Command</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="find"></div>
+                <div class="tab-pane" id="update"></div>
+                <div class="tab-pane" id="remove"></div>
+                <div class="tab-pane" id="command"></div>
+            </div>
         </div>
     </div>
 </div>
