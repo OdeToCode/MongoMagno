@@ -169,7 +169,11 @@
     <Content Include="Scripts\cultures.js" />
     <Content Include="Scripts\format.js" />
     <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\mongoMagno.js" />
+    <Content Include="Scripts\mongoMagno\mainController.js" />
+    <Content Include="Scripts\mongoMagno\selectServerController.js" />
+    <Content Include="Scripts\mongoMagno\webStorage.js" />
+    <Content Include="Scripts\mongoMagno\apiServer.js" />
+    <Content Include="Scripts\mongoMagno\app.js" />
     <Content Include="Scripts\ui-bootstrap.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Tests\jasmine\jasmine-html.js" />

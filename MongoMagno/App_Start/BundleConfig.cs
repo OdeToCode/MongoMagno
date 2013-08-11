@@ -19,7 +19,11 @@ namespace MongoMagno
                             .Include("~/Scripts/ui-bootstrap.js")
                             .Include("~/Scripts/format.js")
                             .Include("~/Scripts/underscore.js")
-                            .Include("~/Scripts/mongoMagno.js"));
+                            .Include("~/Scripts/mongoMagno/app.js")
+                            .Include("~/Scripts/mongoMagno/webStorage.js")
+                            .Include("~/Scripts/mongoMagno/apiServer.js")
+                            .Include("~/Scripts/mongoMagno/selectServerController.js")
+                            .Include("~/Scripts/mongoMagno/mainController.js"));
         }
     }
 }

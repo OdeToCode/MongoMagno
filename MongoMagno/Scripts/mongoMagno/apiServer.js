@@ -1,0 +1,38 @@
+﻿(function(app) {
+
+    var mongoApiServer = function($http, apiRootUrl) {
+
+        var getHeaders = function(server) {
+            var headers = {};
+            if (server && server.username) {
+                headers["X-MMUsername"] = server.username;
+            }
+            if (server && server.password) {
+                headers["X-MMPassword"] = server.password;
+            }
+            return headers;
+        };
+
+        var getDatabases = function(server) {
+            var url = String.format("{0}/server/{1}", apiRootUrl, server.name);            
+            var headers = getHeaders(server);
+            return $http.get(url, { headers: headers });
+        };
+
+        var getCollections = function(server) {
+            var url = String.format("{0}/server/{1}/{2}", apiRootUrl, server.name, server.currentDatabase);
+            var headers = getHeaders(server);
+            return $http.get(url, { headers: headers });
+        };
+
+        return {
+            getDatabases: getDatabases,
+            getCollections: getCollections
+        };
+
+    };
+    mongoApiServer.$inject = ["$http", "apiRootUrl"];
+
+    app.factory("mongoApiServer", mongoApiServer);
+
+}(angular.module("mongoMagno")));
