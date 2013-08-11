@@ -7,6 +7,7 @@
     <script src="../Scripts/angular.js"></script>
     <script src="../Scripts/ui-bootstrap.js"></script>
     <script src="../Scripts/angular-mocks.js"></script>
+    <script src="../Scripts/format.js"></script>
     <script src="../Scripts/mongoMagno.js"></script>
     <link href="jasmine/jasmine.css" rel="stylesheet" />
 </head>
@@ -22,48 +23,54 @@
 
                 var scope;
                 var opened;
-                var fakePromise = {
-                    then: function () {}  
-                };
+                var dialogDefer;
+                var httpBackend;
                 var fakeDialog = {
                     open: function () {
                         opened = true;
-                        return fakePromise;
+                        return dialogDefer.promise;
                     }  
                 };
-                beforeEach(inject(function ($rootScope, $controller, $dialog) {
+                beforeEach(inject(function ($rootScope, $controller, $dialog, $q, mongoApiServer, $httpBackend) {
                     opened = false;
+                    dialogDefer = $q.defer();
                     scope = $rootScope.$new();
+                    httpBackend = $httpBackend;
                     spyOn($dialog, "dialog").andReturn(fakeDialog);
-                    
+                    $httpBackend.when("GET", "/api/server/fooserver").respond(["dba", "dbb", "dbc"]);
+
                     $controller("MainController", {
                         $scope: scope,
-                        $dialog: $dialog
+                        $dialog: $dialog,
+                        mongoApiServer: mongoApiServer
                     });
                 }));
 
                 it("should show connect dialog when launched", function() {
                     expect(opened).toBe(true);
                 });           
-                
+
                 it("should connect to server when dialog accepted", function () {
-                    expect(false).toBe(true);
+                    scope.$apply(function () { dialogDefer.resolve({ name: "fooserver" }); });
+                    httpBackend.flush();
+                    expect(scope.databases.length).toBe(3);
                 });
                 
-                it("should not connect when dialog canceled", function () {
-                    expect(false).toBe(true);
+                it("should not connect when dialog canceled", function () {                  
+                    scope.$apply(function () { dialogDefer.resolve(undefined); });
+                    expect(scope.databases).toBe(undefined);
                 });
-                                            
+                
             });
 
             describe("SelectServerController", function() {
 
                 var scope;
                 var fakeStorage;
-                var dialog;
+                var fakeDialog;
 
                 beforeEach(inject(function ($rootScope, $controller) {
-                    jasmine.createSpyObj("dialog", ["close"]);
+                    fakeDialog = jasmine.createSpyObj("dialog", ["close"]);
                     fakeStorage = {
                         recentServers: ["test1", "test2", "test3", "test4", "test5"],
                         getLocal: function (key) { return this[key]; },
@@ -73,7 +80,7 @@
                     $controller("SelectServerController", {
                         $scope: scope,
                         webStorage: fakeStorage,
-                        dialog: dialog                        
+                        dialog: fakeDialog                        
                     });
                 }));
 

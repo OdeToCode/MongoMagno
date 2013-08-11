@@ -106,22 +106,27 @@
 
     var MainController = function ($scope, $dialog, mongoApiServer) {
 
-        $scope.selectServer = function() {
-            $dialog
-                .dialog(serverSelectDialogOptions)
-                .open()
-                .then(function (result) { $scope.connectToServer(result); });
+        var setDatabases = function(databases) {
+            $scope.databases = databases.data;
         };
 
-        $scope.connectToServer = function(server) {
+        var connectToServer = function (server) {
             if (server) {
                 $scope.currentServer = server;
                 mongoApiServer
                     .getServer($scope.currentServer)
-                    .then(function(result) { $scope.databases = result });
+                    .then(setDatabases);
             }
         };
 
+        var selectServer = function () {
+            $dialog
+                .dialog(serverSelectDialogOptions)
+                .open()
+                .then(connectToServer);
+        };
+
+        $scope.selectServer = selectServer;
         $scope.selectServer();
     };
 
