@@ -8,6 +8,7 @@
     <script src="../Scripts/ui-bootstrap.js"></script>
     <script src="../Scripts/angular-mocks.js"></script>
     <script src="../Scripts/format.js"></script>
+    <script src="../Scripts/underscore.js"></script>
     <script src="../Scripts/mongoMagno.js"></script>
     <link href="jasmine/jasmine.css" rel="stylesheet" />
 </head>
@@ -107,6 +108,8 @@
                 });
 
                 it("should limit the recent server list to 5", function () {
+                    scope.server.name = "somemachinename";
+                    scope.close(true);
                     expect(fakeStorage.recentServers.length).toBe(5);
                 });                               
             });

@@ -103,6 +103,7 @@
             if (ok && $scope.server.name) {
                 result = $scope.server;
                 $scope.servers.unshift($scope.server.name);
+                $scope.servers = _.uniq($scope.servers).slice(0, 5);
                 webStorage.setLocal("recentServers", $scope.servers);
             }
             dialog.close(result);
