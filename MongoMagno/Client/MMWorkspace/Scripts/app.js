@@ -6,7 +6,7 @@
     app.config(function ($dialogProvider) {
         $dialogProvider.options({ backdropClick: false, dialogFade: true });        
     });
-    app.constant("apiRootUrl", "/api");
+    app.constant("apiRootUrl", "/api");    
     app.config.$inject = ["$dialogProvider"];
 
 }());

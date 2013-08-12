@@ -14,13 +14,13 @@
         };
 
         var getDatabases = function(server) {
-            var url = String.format("{0}/server/{1}", apiRootUrl, server.name);            
+            var url = "{0}/server/{1}".format(apiRootUrl, server.name);            
             var headers = getHeaders(server);
             return $http.get(url, { headers: headers });
         };
 
         var getCollections = function(server) {
-            var url = String.format("{0}/server/{1}/{2}", apiRootUrl, server.name, server.currentDatabase);
+            var url = "{0}/server/{1}/{2}".format(apiRootUrl, server.name, server.currentDatabase);
             var headers = getHeaders(server);
             return $http.get(url, { headers: headers });
         };

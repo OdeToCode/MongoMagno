@@ -18,12 +18,14 @@ namespace MongoMagno
                             .Include("~/Scripts/angular.js")
                             .Include("~/Scripts/ui-bootstrap.js")
                             .Include("~/Scripts/format.js")
-                            .Include("~/Scripts/underscore.js")
-                            .Include("~/Scripts/mongoMagno/app.js")
-                            .Include("~/Scripts/mongoMagno/webStorage.js")
-                            .Include("~/Scripts/mongoMagno/apiServer.js")
-                            .Include("~/Scripts/mongoMagno/selectServerController.js")
-                            .Include("~/Scripts/mongoMagno/mainController.js"));
+                            .Include("~/Scripts/underscore.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/MMWorkspace")
+                            .Include("~/Client/MMWorkspace/Scripts/app.js")
+                            .Include("~/Client/MMWorkspace/Scripts/apiServer.js")
+                            .Include("~/Client/MMWorkspace/Scripts/mainController.js")
+                            .Include("~/Client/MMWorkspace/Scripts/selectServerController.js")
+                            .Include("~/Client/MMWorkspace/Scripts/webStorage.js"));
         }
     }
 }

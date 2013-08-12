@@ -157,29 +157,30 @@
     <Compile Include="Services\MongoDb.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\MMWorkspace\Views\main.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\glyphicons-halflings-white.png" />
     <Content Include="img\glyphicons-halflings.png" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Client\MMWorkspace\Tests\angular-mocks.js" />
+    <Content Include="Client\MMWorkspace\Tests\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\format.js" />
     <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\mongoMagno\mainController.js" />
-    <Content Include="Scripts\mongoMagno\selectServerController.js" />
-    <Content Include="Scripts\mongoMagno\webStorage.js" />
-    <Content Include="Scripts\mongoMagno\apiServer.js" />
-    <Content Include="Scripts\mongoMagno\app.js" />
+    <Content Include="Client\MMWorkspace\Scripts\mainController.js" />
+    <Content Include="Client\MMWorkspace\Scripts\selectServerController.js" />
+    <Content Include="Client\MMWorkspace\Scripts\webStorage.js" />
+    <Content Include="Client\MMWorkspace\Scripts\apiServer.js" />
+    <Content Include="Client\MMWorkspace\Scripts\app.js" />
     <Content Include="Scripts\ui-bootstrap.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Tests\jasmine\jasmine-html.js" />
-    <Content Include="Tests\jasmine\jasmine.css" />
-    <Content Include="Tests\jasmine\jasmine.js" />
-    <Content Include="Tests\mongoMangoUnitTests.html" />
-    <Content Include="Views\Home\_serverSelect.html" />
+    <Content Include="Client\MMWorkspace\Tests\jasmine\jasmine-html.js" />
+    <Content Include="Client\MMWorkspace\Tests\jasmine\jasmine.css" />
+    <Content Include="Client\MMWorkspace\Tests\jasmine\jasmine.js" />
+    <Content Include="Client\MMWorkspace\Tests\mongoMangoUnitTests.html" />
+    <Content Include="Client\MMWorkspace\Views\_serverSelect.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

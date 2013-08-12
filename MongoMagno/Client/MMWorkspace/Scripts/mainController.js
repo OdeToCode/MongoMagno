@@ -2,7 +2,7 @@
     "use strict";
 
     var serverSelectDialogOptions = {
-        templateUrl: "/views/home/_serverSelect.html",
+        templateUrl: "/Client/MMWorkspace/Views/_serverSelect.html",
         controller: "SelectServerController"
     };
 
