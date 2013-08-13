@@ -12,6 +12,7 @@
     <script src="../Scripts/app.js"></script>
     <script src="../Scripts/apiServer.js"></script>    
     <script src="../Scripts/mainController.js"></script>
+    <script src="../Scripts/workspaceController.js"></script>
     <script src="../Scripts/selectServerController.js"></script>
     <script src="../Scripts/webStorage.js"></script>
 
@@ -25,7 +26,7 @@
 
             beforeEach(module('mongoMagno'));
 
-            describe('MainController', function () {
+            describe('WorkspaceController', function () {
 
                 var scope;
                 var opened;
@@ -46,7 +47,7 @@
                     $httpBackend.when("GET", "/api/server/fooserver").respond(["dba", "dbb", "dbc"]);
                     $httpBackend.when("GET", "/api/server/fooserver/dba").respond(["c1", "c2", "c3"]);
 
-                    $controller("MainController", {
+                    $controller("WorkspaceController", {
                         $scope: scope,
                         $dialog: $dialog,
                         mongoApiServer: mongoApiServer

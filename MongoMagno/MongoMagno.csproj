@@ -157,7 +157,9 @@
     <Compile Include="Services\MongoDb.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\MMWorkspace\Scripts\workspaceController.js" />
     <Content Include="Client\MMWorkspace\Views\main.html" />
+    <Content Include="Client\MMWorkspace\Views\workspace.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -180,7 +182,7 @@
     <Content Include="Client\MMWorkspace\Tests\jasmine\jasmine.css" />
     <Content Include="Client\MMWorkspace\Tests\jasmine\jasmine.js" />
     <Content Include="Client\MMWorkspace\Tests\mongoMangoUnitTests.html" />
-    <Content Include="Client\MMWorkspace\Views\_serverSelect.html" />
+    <Content Include="Client\MMWorkspace\Views\serverSelect.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
