@@ -2,11 +2,16 @@
     <div class="row-fluid">
         <div class="span12">
             <ul class="nav nav-tabs">
-                <li><a href="#workspace1" data-toggle="tab">Workspace 1</a></li>
-                <li><a>+</a></li>
-            </ul>
+                <li data-ng-repeat="workspace in workspaces" data-ng-class="addActiveIfSelected(workspace)" >
+                    <a href="#{{workspace.id}}" data-toggle="tab">{{workspace.name}}</a>
+                </li>
+                <li><a data-ng-click="addWorkspace()">+</a></li>
+            </ul>            
             <div class="tab-content">
-                <div class="tab-pane" id="workspace1" data-ng-controller="WorkspaceController">
+                <div data-ng-class="addActiveIfSelected(workspace, 'tab-pane')" 
+                     data-ng-repeat="workspace in workspaces" 
+                     id="{{workspace.id}}" 
+                     data-ng-controller="WorkspaceController">
                     <div class="row-fluid">
                         <div class="span3">
                             <div>

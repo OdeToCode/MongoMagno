@@ -159,7 +159,6 @@
   <ItemGroup>
     <Content Include="Client\MMWorkspace\Scripts\workspaceController.js" />
     <Content Include="Client\MMWorkspace\Views\main.html" />
-    <Content Include="Client\MMWorkspace\Views\workspace.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
