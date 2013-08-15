@@ -7,7 +7,7 @@
     };
 
     var WorkspaceController = function ($scope, $dialog, mongoApiServer) {
-
+        
         var setCollections = function(collections) {
             $scope.currentServer.collections = collections.data;
             $scope.currentServer.currentCollection = $scope.currentServer.collections[0];
@@ -22,6 +22,7 @@
         var connectToServer = function (server) {
             if (server) {
                 $scope.currentServer = server;
+                $scope.workspace.name = $scope.currentServer.name;
                 mongoApiServer
                     .getDatabases($scope.currentServer)
                     .then(setDatabases);
@@ -45,6 +46,7 @@
             selectCollection();
         };
 
+        $scope.workspace = $scope.$parent.workspace;
         $scope.selectServer = selectServer;
         $scope.selectDatabase = selectDatabase;
         $scope.selectServer();

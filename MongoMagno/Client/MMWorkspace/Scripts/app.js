@@ -1,7 +1,10 @@
 ﻿(function () {
 
     "use strict";
-    var app = angular.module("mongoMagno", ["ui.bootstrap", "ui.bootstrap.transition"]);
+    var app = angular.module("mongoMagno", [
+        "ui.bootstrap",
+        "ui.bootstrap.transition",
+        "ui.bootstrap.tabs"]);
 
     app.config(function ($dialogProvider) {
         $dialogProvider.options({ backdropClick: false, dialogFade: true });        

@@ -1,18 +1,9 @@
 ﻿<div class="container-fluid" data-ng-controller="MainController">
     <div class="row-fluid">
         <div class="span12">
-            <ul class="nav nav-tabs">
-                <li data-ng-repeat="workspace in workspaces" data-ng-class="addActiveIfSelected(workspace)" >
-                    <a href="#{{workspace.id}}" data-toggle="tab">{{workspace.name}}</a>
-                </li>
-                <li><a data-ng-click="addWorkspace()">+</a></li>
-            </ul>            
-            <div class="tab-content">
-                <div data-ng-class="addActiveIfSelected(workspace, 'tab-pane')" 
-                     data-ng-repeat="workspace in workspaces" 
-                     id="{{workspace.id}}" 
-                     data-ng-controller="WorkspaceController">
-                    <div class="row-fluid">
+            <tabset>
+                <tab data-ng-repeat="workspace in workspaces" heading="{{workspace.name}}" active="workspace.active">
+                    <div class="row-fluid" data-ng-controller="WorkspaceController">                    
                         <div class="span3">
                             <div>
                                 Server: <span class="badge badge-info">{{ currentServer.name }}</span>
@@ -48,10 +39,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </tab>
+                <tab select="addWorkspace()">
+                    <tab-heading>
+                        <i class="icon-plus-sign"></i>
+                    </tab-heading>  
+                </tab>
+            </tabset>                      
         </div>
     </div>
-
-
 </div>

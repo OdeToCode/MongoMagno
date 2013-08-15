@@ -4,21 +4,12 @@
     var MainController = function ($scope) {
         $scope.workspaces =
         [
-            { id: "workspace1", name: "Workspace 1", selected:true }
+            { name: "Workspace 1", active:true }
         ];
-
-        $scope.addActiveIfSelected = function(workspace, existingClass) {
-            var result = existingClass || "";
-            if (workspace.selected) {
-                result += " active";
-            }
-            return result;
-        };
-
-        $scope.addWorkspace = function() {
-            var id = $scope.workspaces.length + 1;
-            angular.forEach($scope.workspaces, function (workspace) { workspace.selected = false });
-            $scope.workspaces.push({ id: "workspace" + id, name: "Workspace " + id, selected: true });
+       
+        $scope.addWorkspace = function() {            
+            angular.forEach($scope.workspaces, function (workspace) { workspace.active = false });
+            $scope.workspaces.push({ name: "Workspace ", active: true });
         };
     };
 
