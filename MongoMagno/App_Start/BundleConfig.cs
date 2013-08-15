@@ -22,11 +22,7 @@ namespace MongoMagno
 
             bundles.Add(new ScriptBundle("~/Scripts/MMWorkspace")
                             .Include("~/Client/MMWorkspace/Scripts/app.js")
-                            .Include("~/Client/MMWorkspace/Scripts/apiServer.js")
-                            .Include("~/Client/MMWorkspace/Scripts/mainController.js")
-                            .Include("~/Client/MMWorkspace/Scripts/workspaceController.js")
-                            .Include("~/Client/MMWorkspace/Scripts/selectServerController.js")
-                            .Include("~/Client/MMWorkspace/Scripts/webStorage.js"));
+                            .Include("~/Client/MMWorkspace/Scripts/*.js"));
         }
     }
 }
