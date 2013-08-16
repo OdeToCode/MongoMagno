@@ -16,7 +16,7 @@
         var setDatabases = function (databases) {
             $scope.currentServer.databases = databases.data;
             $scope.currentServer.currentDatabase = $scope.currentServer.databases[0];
-            selectCollection();
+            getCollections();
         };       
 
         var connectToServer = function (server) {
@@ -36,14 +36,14 @@
                 .then(connectToServer);
         };
 
-        var selectCollection = function() {
+        var getCollections = function() {
             mongoApiServer
                 .getCollections($scope.currentServer)
                 .then(setCollections);
         };
 
         var selectDatabase = function() {
-            selectCollection();
+            getCollections();
         };
 
         $scope.workspace = $scope.$parent.workspace;

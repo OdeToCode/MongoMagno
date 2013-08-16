@@ -1,1 +1,17 @@
-﻿
+﻿textarea {
+    width: 98%;
+}
+
+.collections {
+    font-size: 0.85em;
+    height: 400px;
+    overflow: auto;
+    display: block;
+}
+
+    .collections td {
+        padding: 2px;
+        line-height: 12px;
+        text-align: left;
+        vertical-align: middle;        
+    }
