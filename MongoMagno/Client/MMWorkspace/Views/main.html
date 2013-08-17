@@ -26,8 +26,8 @@
                         </div>
                         <div class="span10" data-ng-controller="CommandController"> 
                             <label>Command</label>
-                            <textarea  rows="5"></textarea>
-                            <button class="btn btn-primary">Execute</button>
+                            <textarea rows="5" data-ng-model="command"></textarea>
+                            <button class="btn btn-primary" data-ng-click="execute()">Execute</button>
                             <hr/>
                             <label>Results</label>
                             <div></div>
