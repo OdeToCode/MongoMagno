@@ -25,9 +25,16 @@
             return $http.get(url, { headers: headers });
         };
 
+        var execute = function(server, command) {
+            var url = "{0}/server/{1}/{2}".format(apiRootUrl, server.name, server.currentDatabase);
+            var headers = getHeaders(server);
+            return $http.post(url, { command: command }, { headers: headers });
+        };
+
         return {
             getDatabases: getDatabases,
-            getCollections: getCollections
+            getCollections: getCollections,
+            execute: execute
         };
 
     };

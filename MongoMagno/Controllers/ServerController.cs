@@ -5,6 +5,11 @@ using MongoMagno.Services;
 
 namespace MongoMagno.Controllers
 {
+    public class TempCommand
+    {
+        public string Command { get; set; }
+    }
+
     public class ServerController : ApiController
     {         
         [GET("api/server/{server}")]
@@ -19,6 +24,12 @@ namespace MongoMagno.Controllers
         {
             var db = new MongoDb(server);
             return db.GetCollections(database);
-        }     
+        }
+
+        [POST("api/server/{server}/{database}")]
+        public string Execute(string server, string database, TempCommand command)
+        {
+            return "execute";
+        }          
     }
 }

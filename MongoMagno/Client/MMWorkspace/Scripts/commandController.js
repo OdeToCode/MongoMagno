@@ -1,13 +1,18 @@
 ﻿(function (app) {
     "use strict";
 
-    var CommandController = function ($scope) {
+    var CommandController = function ($scope, mongoApiServer) {
 
-        $scope.message = "Hello from Command";
+        $scope.command = "";
 
+        $scope.execute = function() {
+            mongoApiServer.execute($scope.currentServer, $scope.command);
+
+        };
+       
     };
 
-    CommandController.$inject = ["$scope"];
+    CommandController.$inject = ["$scope", "mongoApiServer"];
 
     app.controller("CommandController", CommandController);
 
