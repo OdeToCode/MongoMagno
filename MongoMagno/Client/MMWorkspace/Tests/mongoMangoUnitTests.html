@@ -15,6 +15,8 @@
     <script src="../Scripts/workspaceController.js"></script>
     <script src="../Scripts/selectServerController.js"></script>
     <script src="../Scripts/webStorage.js"></script>
+    
+    
 
     <link href="jasmine/jasmine.css" rel="stylesheet" />
 </head>
@@ -41,6 +43,7 @@
                 beforeEach(inject(function ($rootScope, $controller, $dialog, $q, mongoApiServer, $httpBackend) {
                     opened = false;
                     dialogDefer = $q.defer();
+                    $rootScope.workspace = {};
                     scope = $rootScope.$new();
                     httpBackend = $httpBackend;
                     spyOn($dialog, "dialog").andReturn(fakeDialog);
