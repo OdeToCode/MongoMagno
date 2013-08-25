@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="MongoExperiments\Commands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommandRouterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

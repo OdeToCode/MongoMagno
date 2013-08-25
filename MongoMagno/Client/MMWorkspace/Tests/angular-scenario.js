@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * jQuery JavaScript Library v1.8.2
  * http://jquery.com/
  *
@@ -22262,7 +22262,7 @@ function textInputType(scope, element, attr, ctrl, $sniffer, $browser) {
       var key = event.keyCode;
 
       // ignore
-      //    command            modifiers                   arrows
+      //    CommandText            modifiers                   arrows
       if (key === 91 || (15 < key && key < 19) || (37 <= key && key <= 40)) return;
 
       deferListener();

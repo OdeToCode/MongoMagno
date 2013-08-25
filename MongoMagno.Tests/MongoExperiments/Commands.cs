@@ -7,7 +7,7 @@ namespace MongoMagno.Tests.MongoExperiments
 {
     public class Commands
     {
-        [Fact]
+        //[Fact]
         public void CanSendCommandAsJsonToMongo()
         {
             var client = new MongoClient();

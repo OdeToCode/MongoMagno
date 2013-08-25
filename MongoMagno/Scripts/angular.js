@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.2.0rc1
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
@@ -13730,7 +13730,7 @@
                 var key = event.keyCode;
 
                 // ignore
-                //    command            modifiers                   arrows
+                //    CommandText            modifiers                   arrows
                 if (key === 91 || (15 < key && key < 19) || (37 <= key && key <= 40)) return;
 
                 deferListener();

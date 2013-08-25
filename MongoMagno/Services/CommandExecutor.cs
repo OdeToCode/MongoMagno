@@ -2,14 +2,12 @@
 
 namespace MongoMagno.Services
 {
-    public class CommandExecutor
-    {
-        public CommandExecutor()
-        {
-            
-        }
-        
-        private MongoDb _db;
-
+    public abstract class CommandExecutor
+    {       
+    }
+    
+    [CommandMatch("^db.(?<collection>\\w*).find\\(")]
+    public class FindExecutor : CommandExecutor
+    {        
     }
 }
