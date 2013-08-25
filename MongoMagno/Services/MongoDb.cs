@@ -12,7 +12,7 @@ namespace MongoMagno.Services
             var client = new MongoClient(clientSettings);
             _server = client.GetServer();
         }
-
+        
         public IEnumerable<string> GetDatabaseNames()
         {
             return _server.GetDatabaseNames();
