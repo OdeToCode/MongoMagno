@@ -4,9 +4,17 @@ namespace MongoMagno.DependencyResolution
 {
     public static class IoC 
     {
-        public static IContainer Initialize() 
+        public static IContainer Initialize()
         {
-            ObjectFactory.Initialize(x => x.For<IMongoDb>().Use<MongoDb>());
+            var routeTable = new CommandRouteTable();
+            routeTable.Initialize();
+
+            ObjectFactory.Initialize(x =>
+                {
+                    x.For<IMongoDb>().Use<MongoDb>();
+                    x.For<CommandRouteTable>().Use(routeTable);
+                }
+           );
             return ObjectFactory.Container;
         }
     }

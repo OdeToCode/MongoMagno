@@ -9,11 +9,13 @@ namespace MongoMagno.Controllers
     public class ServerController : ApiController
     {
         private readonly IMongoDb _db;
+        private readonly CommandRouter _router;
 
-        public ServerController(IMongoDb db)
+        public ServerController(IMongoDb db, CommandRouter router)
         {
             _db = db;
-        }      
+            _router = router;
+        }
 
         [GET("api/server/{server}")]
         public IEnumerable<string> GetDatabases(string server)
@@ -30,9 +32,10 @@ namespace MongoMagno.Controllers
         }
 
         [POST("api/server/{server}/{database}")]
-        public string Execute(string server, string database, ClientCommand command)
+        public RouteMatchResult Execute(string server, string database, ClientCommand command)
         {
-            return "execute";
+            var route = _router.GetRouteMatch(command);
+            return route;
         }          
     }
 }

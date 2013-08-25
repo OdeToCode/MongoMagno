@@ -17,8 +17,8 @@ namespace MongoMagno.Tests.Services
         [Fact]
         public void Invalid_Route_Uses_Null_Executor()
         {
-            var router = new CommandRouter(_routeTable, new ClientCommand { CommandText = "blahblah" });
-            var result = router.GetRouteMatch();
+            var router = new CommandRouter(_routeTable);
+            var result = router.GetRouteMatch(new ClientCommand { CommandText = "blahblah" });
 
             Assert.Equal(RouteMatchResult.Empty, result);
         }
@@ -26,8 +26,8 @@ namespace MongoMagno.Tests.Services
          [Fact]
          public void Routes_Find_A_Query()
          {
-             var router = new CommandRouter(_routeTable, new ClientCommand { CommandText = "db.foocollection.find({})" });
-             var result = router.GetRouteMatch();             
+             var router = new CommandRouter(_routeTable);
+             var result = router.GetRouteMatch(new ClientCommand { CommandText = "db.foocollection.find({})" });             
 
              Assert.Equal(typeof(FindExecutor), result.Type);
          }
@@ -35,8 +35,8 @@ namespace MongoMagno.Tests.Services
         [Fact]
         public void Finds_Collection_Name_In_Query()
         {
-            var router = new CommandRouter(_routeTable, new ClientCommand { CommandText = "db.foocollection.find({})" });
-            var result = router.GetRouteMatch();
+            var router = new CommandRouter(_routeTable);
+            var result = router.GetRouteMatch(new ClientCommand { CommandText = "db.foocollection.find({})" });
 
             Assert.Equal("foocollection", result.Tokens["collection"]);
         }
