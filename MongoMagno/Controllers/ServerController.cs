@@ -7,19 +7,26 @@ using MongoMagno.Services;
 namespace MongoMagno.Controllers
 {
     public class ServerController : ApiController
-    {         
+    {
+        private readonly IMongoDb _db;
+
+        public ServerController(IMongoDb db)
+        {
+            _db = db;
+        }      
+
         [GET("api/server/{server}")]
         public IEnumerable<string> GetDatabases(string server)
         {
-            var db = new MongoDb(server);
-            return db.GetDatabaseNames();
+            _db.Connect(server);
+            return _db.GetDatabaseNames();
         }
 
         [GET("api/server/{server}/{database}")]
         public IEnumerable<string> GetCollections(string server, string database)
         {
-            var db = new MongoDb(server);
-            return db.GetCollections(database);
+            _db.Connect(server);
+            return _db.GetCollections(database);
         }
 
         [POST("api/server/{server}/{database}")]

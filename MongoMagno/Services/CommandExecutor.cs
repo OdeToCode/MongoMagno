@@ -2,7 +2,7 @@
 
 namespace MongoMagno.Services
 {
-    public abstract class CommandExecutor
+    public interface CommandExecutor
     {       
     }
     

@@ -7,8 +7,7 @@ using System.Text.RegularExpressions;
 namespace MongoMagno.Services
 {
     public class CommandRouteTable  
-    {
-        
+    {        
         public CommandRouteTable Initialize()
         {
             var executorTypes = Assembly.GetExecutingAssembly()
