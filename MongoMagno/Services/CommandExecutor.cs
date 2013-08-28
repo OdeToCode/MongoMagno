@@ -1,4 +1,5 @@
 ﻿using MongoMagno.Models;
+using MongoMagno.Services.JsVm;
 
 namespace MongoMagno.Services
 {
@@ -11,7 +12,7 @@ namespace MongoMagno.Services
     {
         public void Execute(ClientCommand command, RouteMatchResult routeMatch)
         {
-            throw new System.NotImplementedException();
+            var vm = new JavaScriptMachine();
         }
     }
 }
