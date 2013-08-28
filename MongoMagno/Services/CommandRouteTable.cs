@@ -49,7 +49,7 @@ namespace MongoMagno.Services
                     return result;
                 }
             }
-            return RouteMatchResult.Empty;
+            return RouteMatchResult.Default;
         }
 
         private const RegexOptions _regexOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline;

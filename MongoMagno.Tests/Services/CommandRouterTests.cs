@@ -20,7 +20,7 @@ namespace MongoMagno.Tests.Services
             var router = new CommandRouter(_routeTable);
             var result = router.GetRouteMatch(new ClientCommand { CommandText = "blahblah" });
 
-            Assert.Equal(RouteMatchResult.Empty, result);
+            Assert.Equal(RouteMatchResult.Default, result);
         }
 
          [Fact]
@@ -29,16 +29,7 @@ namespace MongoMagno.Tests.Services
              var router = new CommandRouter(_routeTable);
              var result = router.GetRouteMatch(new ClientCommand { CommandText = "db.foocollection.find({})" });             
 
-             Assert.Equal(typeof(FindExecutor), result.Type);
-         }
-
-        [Fact]
-        public void Finds_Collection_Name_In_Query()
-        {
-            var router = new CommandRouter(_routeTable);
-            var result = router.GetRouteMatch(new ClientCommand { CommandText = "db.foocollection.find({})" });
-
-            Assert.Equal("foocollection", result.Tokens["collection"]);
-        }
+             Assert.Equal(typeof(InterpretiveExecutor), result.Type);
+         }        
     }
 }

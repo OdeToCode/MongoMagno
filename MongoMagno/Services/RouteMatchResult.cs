@@ -11,6 +11,6 @@ namespace MongoMagno.Services
 
         public Type Type { get; set; }
         public RouteMatchTokens Tokens { get; set; }
-        public static RouteMatchResult Empty = new RouteMatchResult();
+        public static RouteMatchResult Default = new RouteMatchResult() {Type = typeof (InterpretiveExecutor)};
     }
 }
