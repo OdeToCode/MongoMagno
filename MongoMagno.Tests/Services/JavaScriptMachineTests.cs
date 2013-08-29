@@ -8,10 +8,12 @@ namespace MongoMagno.Tests.Services
         [Fact]
         public void Can_Execute_Script_With_Defaults()
         {
-            var vm = new JavaScriptMachine();
-            vm.Execute("db = new Database('test');");
+            using (var vm = new JavaScriptMachine())
+            {
+                vm.Execute("db = new Database('test');");
 
-            Assert.Equal("test", vm.Script.db.name);
+                Assert.Equal("test", vm.Script.db.name);
+            }
         }
     }
 }

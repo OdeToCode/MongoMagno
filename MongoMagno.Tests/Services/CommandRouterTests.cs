@@ -1,35 +1,27 @@
 ﻿using MongoMagno.Models;
-using MongoMagno.Services;
+using MongoMagno.Services.Commands;
+using MongoMagno.Services.Routing;
+using MongoMagno.Tests.Fakes;
 using Xunit;
 
 namespace MongoMagno.Tests.Services
 {
     public class CommandRouterTests
     {
-        private CommandRouteTable _routeTable;
+        private CommandRouteContainer _routeContainer;
 
         public CommandRouterTests()
         {
-            _routeTable = new CommandRouteTable();
-            _routeTable.Initialize();
+            _routeContainer = new CommandRouteContainer(new FakeExecutorResolver());
         }
 
         [Fact]
-        public void Invalid_Route_Uses_Null_Executor()
+        public void Routes_Find_A_Query()
         {
-            var router = new CommandRouter(_routeTable);
-            var result = router.GetRouteMatch(new ClientCommand { CommandText = "blahblah" });
+            var router = new CommandRouter(_routeContainer);
+            var result = router.FindRouteForCommand(new ClientCommand { CommandText = "db.foocollection.find({})" });
 
-            Assert.Equal(RouteMatchResult.Default, result);
+            Assert.Equal(typeof(InterpretiveExecutor), result.Executor.GetType());
         }
-
-         [Fact]
-         public void Routes_Find_A_Query()
-         {
-             var router = new CommandRouter(_routeTable);
-             var result = router.GetRouteMatch(new ClientCommand { CommandText = "db.foocollection.find({})" });             
-
-             Assert.Equal(typeof(InterpretiveExecutor), result.Type);
-         }        
     }
 }

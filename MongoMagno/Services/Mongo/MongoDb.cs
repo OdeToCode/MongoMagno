@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MongoDB.Driver;
 
-namespace MongoMagno.Services
+namespace MongoMagno.Services.Mongo
 {
     public class MongoDb : IMongoDb
-    {
-    
+    {    
         public void Connect(string server)
         {
             var clientSettings = new MongoClientSettings();
@@ -25,7 +24,7 @@ namespace MongoMagno.Services
             var db = _server.GetDatabase(database);
             return db.GetCollectionNames();
         }
-            
+    
         MongoServer _server;
     }
 }

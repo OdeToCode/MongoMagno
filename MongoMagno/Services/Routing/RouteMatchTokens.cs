@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace MongoMagno.Services
+namespace MongoMagno.Services.Routing
 {
     public class RouteMatchTokens : Dictionary<string, string>
     {

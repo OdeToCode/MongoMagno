@@ -18,7 +18,7 @@
 using System.Web.Http.Dependencies;
 using StructureMap;
 
-namespace MongoMagno.DependencyResolution
+namespace MongoMagno.Services.IoC
 {
     /// <summary>
     /// The structure map dependency resolver.

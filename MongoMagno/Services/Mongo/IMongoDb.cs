@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace MongoMagno.Services
+namespace MongoMagno.Services.Mongo
 {
-    public interface IMongoDb
+    public interface IMongoDb 
     {
         void Connect(string server);
         IEnumerable<string> GetDatabaseNames();

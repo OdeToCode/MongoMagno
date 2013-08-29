@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace MongoMagno.Services
+namespace MongoMagno.Services.Commands
 {
     public class CommandMatchAttribute : Attribute
     {

@@ -1,6 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
-using MongoMagno.DependencyResolution;
+using MongoMagno.Services;
+using MongoMagno.Services.IoC;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(MongoMagno.App_Start.StructuremapMvc), "Start")]
 

@@ -3,6 +3,8 @@ using System.Web.Http;
 using AttributeRouting.Web.Http;
 using MongoMagno.Models;
 using MongoMagno.Services;
+using MongoMagno.Services.Mongo;
+using MongoMagno.Services.Routing;
 
 namespace MongoMagno.Controllers
 {
@@ -32,10 +34,13 @@ namespace MongoMagno.Controllers
         }
 
         [POST("api/server/{server}/{database}")]
-        public RouteMatchResult Execute(string server, string database, ClientCommand command)
+        public CommandResult Execute(ClientCommand command)
         {
-            var route = _router.GetRouteMatch(command);
-            return route;
+            var route = _router.FindRouteForCommand(command);
+            using (var executor = route.Executor)
+            {
+                return executor.Execute(command);
+            }
         }          
     }
 }
