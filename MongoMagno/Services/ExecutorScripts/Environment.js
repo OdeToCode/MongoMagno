@@ -1,19 +1,19 @@
 ﻿var self = this;
 self.environment = function () {
-
-    var createDatabase = function(name) {
-        self.db = new Database(name);
+    
+    var createDatabase = function () {
+        self.db = new Database();
     };
 
     var createCollections = function(names) {
-        for (var i in names) {
+        for (var i = 0; i < names.Length; i++) {           
             self.db.addCollection(names[i]);
         }        
     };
-
+  
     return {
         createDatabase: createDatabase,
-        createCollections: createCollections
+        createCollections: createCollections      
     };
 
 }();

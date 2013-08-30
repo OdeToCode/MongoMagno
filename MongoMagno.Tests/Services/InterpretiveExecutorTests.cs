@@ -24,13 +24,13 @@ namespace MongoMagno.Tests.Services
                 {
                     Server = "localhost",
                     Database = "test",
-                    CommandText = "db.foo.find({x:3}, {id:1})"
+                    CommandText = "db.collection_a.find({x:3}, {id:1})"
                 };
 
             var executor = new InterpretiveExecutor(_db, _vm);
             var result = executor.Execute(command);
 
-            Assert.NotNull(result);
+            Assert.Equal("Find", result.Command);
         }       
     }
 }

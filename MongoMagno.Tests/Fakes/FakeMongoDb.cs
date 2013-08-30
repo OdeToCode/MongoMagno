@@ -1,4 +1,5 @@
-﻿using MongoMagno.Services.Mongo;
+﻿using System.Collections.Generic;
+using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Tests.Fakes
 {
@@ -9,14 +10,18 @@ namespace MongoMagno.Tests.Fakes
             throw new System.NotImplementedException();
         }
 
-        public System.Collections.Generic.IEnumerable<string> GetDatabaseNames()
+        public IEnumerable<string> GetDatabaseNames()
         {
-            throw new System.NotImplementedException();
+            return new[] {"dba", "dbb", "dbc"};
         }
 
-        public System.Collections.Generic.IEnumerable<string> GetCollections(string database)
+        public IEnumerable<string> GetCollections(string database)
         {
-            throw new System.NotImplementedException();
+            return new[] {"collection_a", "collection_b"};
         }
+
+        public string Server;
+        public string[] Databases = {"dba", "dbb", "dbc"};
+        public string[] Collections = {"collection_a", "collection_b"};
     }
 }

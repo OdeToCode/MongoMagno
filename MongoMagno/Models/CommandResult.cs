@@ -2,6 +2,6 @@
 {
     public class CommandResult
     {
-         
+        public string Command { get; set; }
     }
 }

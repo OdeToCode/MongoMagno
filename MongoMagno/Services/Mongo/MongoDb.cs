@@ -14,6 +14,15 @@ namespace MongoMagno.Services.Mongo
             _server = client.GetServer();
         }
         
+        public void Find(string databaseName, string collectionName, dynamic query)
+        {
+            //var db = _server.GetDatabase(databaseName);
+            //var collection = db.GetCollection(collectionName);
+            //var cussor = collection.Find(QueryDocument.Create(""));
+            //cussor.Options.
+
+        }
+
         public IEnumerable<string> GetDatabaseNames()
         {
             return _server.GetDatabaseNames();

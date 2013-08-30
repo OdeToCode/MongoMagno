@@ -26,14 +26,14 @@ namespace MongoMagno.Controllers
             return _db.GetDatabaseNames();
         }
 
-        [GET("api/server/{server}/{database}")]
+        [GET("api/server/{server}/{databaseName}")]
         public IEnumerable<string> GetCollections(string server, string database)
         {
             _db.Connect(server);
             return _db.GetCollections(database);
         }
 
-        [POST("api/server/{server}/{database}")]
+        [POST("api/server/{server}/{databaseName}")]
         public CommandResult Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);

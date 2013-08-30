@@ -7,19 +7,21 @@ namespace MongoMagno.Services.JsVm
 {
     public interface IJavaScriptMachine : IDisposable
     {
-        void CreateEnvironment(string database, string[] collectionNames);
+        void CreateEnvironment(string[] collectionNames);
+        dynamic Evaluate(string expression);
     }
 
     public class JavaScriptMachine : JScriptEngine, IJavaScriptMachine
-    {
+    {      
         public JavaScriptMachine()
+            :base(WindowsScriptEngineFlags.EnableDebugging)
         {
-            LoadDefaultScripts();
+            LoadDefaultScripts();                
         }
-
-        public void CreateEnvironment(string database, string[] collectionNames)
+        
+        public void CreateEnvironment(string[] collectionNames)
         {
-            Script.environment.createDatabase(database);
+            Script.environment.createDatabase();
             Script.environment.createCollections(collectionNames);
         }
 

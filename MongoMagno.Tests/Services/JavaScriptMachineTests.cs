@@ -10,9 +10,19 @@ namespace MongoMagno.Tests.Services
         {
             using (var vm = new JavaScriptMachine())
             {
-                vm.Execute("db = new Database('test');");
+                vm.Execute("db = new Database();");
+                Assert.NotNull(vm.Script.db);
+            }
+        }
 
-                Assert.Equal("test", vm.Script.db.name);
+        [Fact]
+        public void Can_Create_Db_Collections()
+        {
+            using (var vm = new JavaScriptMachine())
+            {
+                vm.CreateEnvironment(new[] {"collection_a", "collection_b"});
+
+                Assert.NotNull(vm.Script.db.collection_a);
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿var Database = function(name) {
-    this.name = name;
+﻿var Database = function() {
+
 };
 
 Database.prototype = {
