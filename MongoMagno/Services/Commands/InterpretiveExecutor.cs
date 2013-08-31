@@ -67,7 +67,6 @@ namespace MongoMagno.Services.Commands
             return null;
         }
 
-
         private Dictionary<string, Func<dynamic, CommandResult>> _map =
             new Dictionary<string, Func<dynamic, CommandResult>>();
     }
