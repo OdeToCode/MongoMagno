@@ -27,11 +27,7 @@ namespace MongoMagno.Services.Commands
 
         private CommandResult ExecuteCommand(ClientCommand command)
         {
-            dynamic result =  _vm.Evaluate(command.CommandText);
-            //if (result.name == "find")
-            //{
-            //    return new CommandResult() {Command = "Find"};
-            //}
+            dynamic result =  _vm.Evaluate(command.CommandText);          
             return null;
         }
 

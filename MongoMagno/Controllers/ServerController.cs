@@ -2,7 +2,6 @@
 using System.Web.Http;
 using AttributeRouting.Web.Http;
 using MongoMagno.Models;
-using MongoMagno.Services;
 using MongoMagno.Services.Mongo;
 using MongoMagno.Services.Routing;
 
@@ -26,14 +25,14 @@ namespace MongoMagno.Controllers
             return _db.GetDatabaseNames();
         }
 
-        [GET("api/server/{server}/{databaseName}")]
+        [GET("api/server/{server}/{database}")]
         public IEnumerable<string> GetCollections(string server, string database)
         {
             _db.Connect(server);
             return _db.GetCollections(database);
         }
 
-        [POST("api/server/{server}/{databaseName}")]
+        [POST("api/server/{server}/{database}")]
         public CommandResult Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);
