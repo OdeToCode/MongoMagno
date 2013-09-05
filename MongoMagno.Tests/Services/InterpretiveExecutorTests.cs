@@ -6,6 +6,11 @@ using Xunit;
 
 namespace MongoMagno.Tests.Services
 {
+    public interface IFoo<T>
+    {
+        
+    }
+
     public class InterpretiveExecutorTests
     {
         FakeMongoDb _db;

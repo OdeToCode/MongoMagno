@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using MongoDB.Bson;
 using MongoMagno.Models;
 using MongoMagno.Services.JsVm;
 using MongoMagno.Services.Mongo;
+using Newtonsoft.Json;
 
 namespace MongoMagno.Services.Commands
 {
@@ -21,14 +24,23 @@ namespace MongoMagno.Services.Commands
         public CommandResult Execute(ClientCommand command)
         {
             InitializeEnvironment(command);
-            var result = ExecuteCommand(command);
-            return result;
+            var parsed = ExecuteCommand(command);
+
+            return null;
         }
 
-        private CommandResult ExecuteCommand(ClientCommand command)
+        private ParsedCommand ExecuteCommand(ClientCommand command)
         {
-            dynamic result =  _vm.Evaluate(command.CommandText);          
-            return null;
+            dynamic result =  _vm.Evaluate(command.CommandText);
+            var parsed = new ParsedCommand();
+            for (var i = 0; i < result.captures.length; i++)
+            {
+                var option = new CommandOperator();
+                option.Name = result.captures[i].name;
+                var json = JsonConvert.SerializeObject(result.captures[i].args);
+                option.Arguments = BsonDocument.Parse(json);
+            }
+            return parsed;
         }
 
         private void InitializeEnvironment(ClientCommand command)

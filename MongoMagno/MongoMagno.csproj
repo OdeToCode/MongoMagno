@@ -172,6 +172,7 @@
     <Compile Include="Services\Commands\CommandRouteContainer.cs" />
     <Compile Include="Services\Commands\ExecutorResolver.cs" />
     <Compile Include="Services\Commands\InterpretiveExecutor.cs" />
+    <Compile Include="Services\Commands\ParsedCommand.cs" />
     <Compile Include="Services\IoC\IoC.cs" />
     <Compile Include="Services\IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="Services\IoC\StructureMapDependencyScope.cs" />
