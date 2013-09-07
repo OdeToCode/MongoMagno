@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using MongoDB.Bson;
 using MongoMagno.Models;
@@ -14,25 +13,33 @@ namespace MongoMagno.Services.Commands
     {
         private readonly IMongoDb _db;
         private readonly IJavaScriptMachine _vm;
+        private readonly InterpretiveCommandMap _map;
 
         public InterpretiveExecutor(IMongoDb db, IJavaScriptMachine vm)
         {
             _db = db;
             _vm = vm;
+            _map = new InterpretiveCommandMap(this);
         }
 
         public CommandResult Execute(ClientCommand command)
         {
             InitializeEnvironment(command);
-            var parsed = ExecuteCommand(command);
-
+            var parsed = ParseCommand(command);
+            foreach (var option in parsed.Operators)
+            {
+                
+            }
             return null;
         }
 
-        private ParsedCommand ExecuteCommand(ClientCommand command)
+        private ParsedCommand ParseCommand(ClientCommand command)
         {
             dynamic result =  _vm.Evaluate(command.CommandText);
+           
             var parsed = new ParsedCommand();
+            parsed.Collection = result.collectionName;            
+            
             for (var i = 0; i < result.captures.length; i++)
             {
                 var option = new CommandOperator();
@@ -55,27 +62,14 @@ namespace MongoMagno.Services.Commands
         }
     }
 
-    public class InterpretiveCommandMap
+  
+    public class InterpretiveCommandMap : Dictionary<string, Func<ParsedCommand, CommandResult>>
     {
-        private readonly IMongoDb _db;
+        private readonly InterpretiveExecutor _executor;
 
-        public InterpretiveCommandMap(IMongoDb db)
+        public InterpretiveCommandMap(InterpretiveExecutor executor)
         {
-            _db = db;
+            _executor = executor;
         }
-
-        public InterpretiveCommandMap()
-        {
-            _map.Add("Find", Find);
-        }
-
-        private CommandResult Find(dynamic arg)
-        {
-            //var result = _db.Find
-            return null;
-        }
-
-        private Dictionary<string, Func<dynamic, CommandResult>> _map =
-            new Dictionary<string, Func<dynamic, CommandResult>>();
     }
 }

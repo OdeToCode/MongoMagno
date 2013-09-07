@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace MongoMagno.Services.Mongo
@@ -14,12 +16,13 @@ namespace MongoMagno.Services.Mongo
             _server = client.GetServer();
         }
         
-        public void Find(string databaseName, string collectionName, dynamic query)
+        public IEnumerable Find(string databaseName, string collectionName, BsonDocument query)
         {
-            //var db = _server.GetDatabase(databaseName);
-            //var collection = db.GetCollection(collectionName);
+            var db = _server.GetDatabase(databaseName);
+            var collection = db.GetCollection(collectionName);
             //var cussor = collection.Find(QueryDocument.Create(""));
-            //cussor.Options.
+            //cussor.Options.            
+            return null;
 
         }
 

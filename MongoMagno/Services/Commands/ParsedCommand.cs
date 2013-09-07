@@ -10,6 +10,7 @@ namespace MongoMagno.Services.Commands
             Operators = new List<CommandOperator>();
         }
 
+        public string Collection { get; set; }
         public IList<CommandOperator> Operators { get; set; }
     }
 

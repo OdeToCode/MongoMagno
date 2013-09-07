@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Tests.Fakes
@@ -7,7 +9,7 @@ namespace MongoMagno.Tests.Fakes
     {
         public void Connect(string server)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public IEnumerable<string> GetDatabaseNames()
@@ -18,6 +20,11 @@ namespace MongoMagno.Tests.Fakes
         public IEnumerable<string> GetCollections(string database)
         {
             return new[] {"collection_a", "collection_b"};
+        }
+
+        public IEnumerable Find(string database, string collection, BsonDocument document)
+        {
+            return null;
         }
 
         public string Server;

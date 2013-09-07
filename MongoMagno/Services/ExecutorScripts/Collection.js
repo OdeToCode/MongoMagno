@@ -1,7 +1,8 @@
-﻿var Collection = function () {
+﻿var Collection = function (name) {
 
     var self = this;
     self.captures = [];
+    self.collectionName = name;
     var commands = ["find", "findOne", "limit", "orderBy"];
 
     for (var i = 0; i < commands.length; i++) {
