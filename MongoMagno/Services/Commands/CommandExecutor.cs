@@ -5,6 +5,6 @@ namespace MongoMagno.Services.Commands
 {
     public interface ICommandExecutor : IDisposable
     {
-        CommandResult Execute(ClientCommand command);
+        SomethingResult Execute(ClientCommand command);
     }
 }

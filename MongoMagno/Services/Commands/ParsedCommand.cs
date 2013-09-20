@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace MongoMagno.Services.Commands
 {
@@ -16,7 +17,14 @@ namespace MongoMagno.Services.Commands
 
     public class CommandOperator
     {
-        public string Name { get; set; }
-        public BsonDocument Arguments { get; set; }
+        public CommandOperator(string name, object arguments)
+        {
+            Name = name;
+            var json = JsonConvert.SerializeObject(arguments);
+            Arguments = BsonDocument.Parse(json);
+        }
+
+        public string Name { get; protected set; }
+        public BsonDocument Arguments { get; protected set; }
     }
 }

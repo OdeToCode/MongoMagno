@@ -9,6 +9,8 @@ namespace MongoMagno.Services.Mongo
         void Connect(string server);
         IEnumerable<string> GetDatabaseNames();
         IEnumerable<string> GetCollections(string database);
-        IEnumerable Find(string database, string collection, BsonDocument query);  
+        void SetCurrentDatabase(string databaseName);
+        void SetCurrentCollection(string collectionName);
+        IMongoDbCursor Find(BsonDocument query);
     }
 }

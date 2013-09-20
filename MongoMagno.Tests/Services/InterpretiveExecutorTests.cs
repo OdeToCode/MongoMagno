@@ -35,7 +35,7 @@ namespace MongoMagno.Tests.Services
             var executor = new InterpretiveExecutor(_db, _vm);
             var result = executor.Execute(command);
 
-            Assert.Equal("Find", result.Command);
+            Assert.Equal("find", result.Command);
         }       
     }
 }

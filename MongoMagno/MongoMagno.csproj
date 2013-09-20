@@ -161,23 +161,29 @@
     <Compile Include="Binding\HeaderValueProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Exceptions\CommandNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientCommand.cs" />
-    <Compile Include="Models\CommandResult.cs" />
+    <Compile Include="Models\SomethingResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Commands\CommandExecutor.cs" />
     <Compile Include="Services\Commands\CommandMatchAttribute.cs" />
     <Compile Include="Services\Commands\CommandRouteContainer.cs" />
     <Compile Include="Services\Commands\ExecutorResolver.cs" />
+    <Compile Include="Services\Commands\FindExecutor.cs" />
+    <Compile Include="Services\Commands\InterpretiveCommandMap.cs" />
     <Compile Include="Services\Commands\InterpretiveExecutor.cs" />
+    <Compile Include="Services\Commands\IOperatorExecutor.cs" />
     <Compile Include="Services\Commands\ParsedCommand.cs" />
     <Compile Include="Services\IoC\IoC.cs" />
     <Compile Include="Services\IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="Services\IoC\StructureMapDependencyScope.cs" />
     <Compile Include="Services\JsVm\JavaScriptMachine.cs" />
+    <Compile Include="Services\Mongo\IMongoDbCursor.cs" />
     <Compile Include="Services\Mongo\IMongoDb.cs" />
+    <Compile Include="Services\Mongo\MongoDbCursor.cs" />
     <Compile Include="Services\Mongo\MongoDb.cs" />
     <Compile Include="Services\Routing\CommandRouter.cs" />
     <Compile Include="Services\Routing\RouteMatchResult.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace MongoMagno.Models
 {
-    public class CommandResult
+    public class SomethingResult
     {
         public string Command { get; set; }
     }

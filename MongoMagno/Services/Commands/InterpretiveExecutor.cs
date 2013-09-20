@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
 using MongoMagno.Models;
 using MongoMagno.Services.JsVm;
 using MongoMagno.Services.Mongo;
-using Newtonsoft.Json;
 
 namespace MongoMagno.Services.Commands
 {
@@ -13,27 +9,30 @@ namespace MongoMagno.Services.Commands
     {
         private readonly IMongoDb _db;
         private readonly IJavaScriptMachine _vm;
-        private readonly InterpretiveCommandMap _map;
+        private readonly InterpretiveCommandMap _commandMap;
 
         public InterpretiveExecutor(IMongoDb db, IJavaScriptMachine vm)
         {
             _db = db;
             _vm = vm;
-            _map = new InterpretiveCommandMap(this);
+            _commandMap = new InterpretiveCommandMap(_db);
         }
 
-        public CommandResult Execute(ClientCommand command)
+        public SomethingResult Execute(ClientCommand command)
         {
             InitializeEnvironment(command);
             var parsed = ParseCommand(command);
             foreach (var option in parsed.Operators)
             {
-                
+                var executor = _commandMap.GetExecutorFor(option.Name);
+                var result = executor.Execute(option);
+                return result;
             }
             return null;
-        }
 
-        private ParsedCommand ParseCommand(ClientCommand command)
+        }
+     
+        ParsedCommand ParseCommand(ClientCommand command)
         {
             dynamic result =  _vm.Evaluate(command.CommandText);
            
@@ -42,15 +41,13 @@ namespace MongoMagno.Services.Commands
             
             for (var i = 0; i < result.captures.length; i++)
             {
-                var option = new CommandOperator();
-                option.Name = result.captures[i].name;
-                var json = JsonConvert.SerializeObject(result.captures[i].args);
-                option.Arguments = BsonDocument.Parse(json);
+                var option = new CommandOperator(result.captures[i].name, result.captures[i].args);                
+                parsed.Operators.Add(option);
             }
             return parsed;
         }
 
-        private void InitializeEnvironment(ClientCommand command)
+        void InitializeEnvironment(ClientCommand command)
         {
             var collections = _db.GetCollections(command.Database).ToArray();
             _vm.CreateEnvironment(collections);
@@ -59,17 +56,6 @@ namespace MongoMagno.Services.Commands
         public void Dispose()
         {
             _vm.Dispose();
-        }
-    }
-
-  
-    public class InterpretiveCommandMap : Dictionary<string, Func<ParsedCommand, CommandResult>>
-    {
-        private readonly InterpretiveExecutor _executor;
-
-        public InterpretiveCommandMap(InterpretiveExecutor executor)
-        {
-            _executor = executor;
-        }
+        }       
     }
 }

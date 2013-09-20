@@ -22,7 +22,22 @@ namespace MongoMagno.Tests.Fakes
             return new[] {"collection_a", "collection_b"};
         }
 
-        public IEnumerable Find(string database, string collection, BsonDocument document)
+        public void SetCurrentDatabase(string databaseName)
+        {
+            CurrentDatabase = databaseName;
+        }
+
+        public void SetCurrentCollection(string collectionName)
+        {
+            CurrentCollection = collectionName;
+        }
+
+        IMongoDbCursor IMongoDb.Find(BsonDocument query)
+        {
+            return null;
+        }
+
+        public IEnumerable Find(BsonDocument document)
         {
             return null;
         }
@@ -30,5 +45,7 @@ namespace MongoMagno.Tests.Fakes
         public string Server;
         public string[] Databases = {"dba", "dbb", "dbc"};
         public string[] Collections = {"collection_a", "collection_b"};
+        public string CurrentDatabase;
+        public string CurrentCollection;
     }
 }
