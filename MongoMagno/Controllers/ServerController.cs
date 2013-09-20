@@ -33,7 +33,7 @@ namespace MongoMagno.Controllers
         }
 
         [POST("api/server/{server}/{database}")]
-        public SomethingResult Execute(ClientCommand command)
+        public ExecutionResult Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);
             using (var executor = route.Executor)

@@ -6,10 +6,10 @@
     var commands = ["find", "findOne", "limit", "orderBy"];
 
     for (var i = 0; i < commands.length; i++) {
-        this[commands[i]] = function (name) {
+        this[commands[i]] = function (commandName) {
 
             return function () {
-                self.captures.push({ name: name, args: Array.prototype.slice.call(arguments) });
+                self.captures.push({ name: commandName, args: Array.prototype.slice.apply(arguments) });
                 return self;
             };
 

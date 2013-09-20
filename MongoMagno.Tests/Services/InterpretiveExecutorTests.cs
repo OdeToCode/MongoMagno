@@ -6,12 +6,7 @@ using MongoMagno.Tests.Fakes;
 using Xunit;
 
 namespace MongoMagno.Tests.Services
-{
-    public interface IFoo<T>
-    {
-        
-    }
-
+{  
     public class InterpretiveExecutorTests
     {
         FakeMongoDb _db;
@@ -36,7 +31,10 @@ namespace MongoMagno.Tests.Services
             var executor = new InterpretiveExecutor(_db, _vm);
             var result = executor.Execute(command);
 
-            Assert.Equal("find", result.Command);
+            Assert.Equal(1, result.ParsedCommand.Operators.Count);
+            Assert.Equal("find", result.ParsedCommand.Operators[0].Name);
+            Assert.Equal(3, result.ParsedCommand.Operators[0].Arguments["0"].AsBsonDocument["x"].AsInt32);
+            Assert.Equal(1, result.ParsedCommand.Operators[0].Arguments["1"].AsBsonDocument["id"].AsInt32);
         }       
 
         [Fact]

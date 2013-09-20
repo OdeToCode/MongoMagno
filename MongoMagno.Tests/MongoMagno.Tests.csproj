@@ -135,6 +135,7 @@
     <Compile Include="MongoExperiments\Commands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommandRouterTests.cs" />
+    <Compile Include="Services\InterpretiveCommandMapTests.cs" />
     <Compile Include="Services\InterpretiveExecutorTests.cs" />
     <Compile Include="Services\JavaScriptMachineTests.cs" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using MongoDB.Driver;
-using MongoMagno.Models;
+﻿using MongoMagno.Models;
 using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Services.Commands
@@ -14,10 +13,10 @@ namespace MongoMagno.Services.Commands
         }
 
 
-        public SomethingResult Execute(CommandOperator op)
+        public string Execute(CommandOperator op)
         {
             var cursor = _db.Find(op.Arguments);
-            return new SomethingResult() {Command = "find"};
+            return "temp";
         }
     }
 }
