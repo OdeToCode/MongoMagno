@@ -161,6 +161,7 @@
     <Compile Include="Binding\HeaderValueProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Exceptions\ExecutionException.cs" />
     <Compile Include="Exceptions\CommandNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

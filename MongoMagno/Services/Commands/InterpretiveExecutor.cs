@@ -1,4 +1,6 @@
 using System.Linq;
+using Microsoft.ClearScript;
+using MongoMagno.Exceptions;
 using MongoMagno.Models;
 using MongoMagno.Services.JsVm;
 using MongoMagno.Services.Mongo;
@@ -31,20 +33,33 @@ namespace MongoMagno.Services.Commands
             return null;
 
         }
-     
+
         ParsedCommand ParseCommand(ClientCommand command)
         {
-            dynamic result =  _vm.Evaluate(command.CommandText);
-           
-            var parsed = new ParsedCommand();
-            parsed.Collection = result.collectionName;            
+            dynamic result = EvaluateCommand(command);
             
+            var parsed = new ParsedCommand();
+            parsed.Collection = result.collectionName;
             for (var i = 0; i < result.captures.length; i++)
             {
-                var option = new CommandOperator(result.captures[i].name, result.captures[i].args);                
+                var option = new CommandOperator(result.captures[i].name, result.captures[i].args);
                 parsed.Operators.Add(option);
             }
+
+
             return parsed;
+        }
+
+        dynamic EvaluateCommand(ClientCommand command)
+        {
+            try
+            {
+                return _vm.Evaluate(command.CommandText);
+            }
+            catch (ScriptEngineException ex)
+            {
+                throw new ExecutionException(ex);
+            }
         }
 
         void InitializeEnvironment(ClientCommand command)
@@ -56,6 +71,6 @@ namespace MongoMagno.Services.Commands
         public void Dispose()
         {
             _vm.Dispose();
-        }       
+        }
     }
 }

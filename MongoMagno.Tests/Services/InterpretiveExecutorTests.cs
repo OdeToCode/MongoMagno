@@ -1,4 +1,5 @@
-﻿using MongoMagno.Models;
+﻿using MongoMagno.Exceptions;
+using MongoMagno.Models;
 using MongoMagno.Services.Commands;
 using MongoMagno.Services.JsVm;
 using MongoMagno.Tests.Fakes;
@@ -37,5 +38,20 @@ namespace MongoMagno.Tests.Services
 
             Assert.Equal("find", result.Command);
         }       
+
+        [Fact]
+        public void Throws_When_Syntax_Is_Bad()
+        {
+            var command = new ClientCommand
+            {
+                Server = "localhost",
+                Database = "test",
+                CommandText = "db.collection_a.blarg()"
+            };
+
+            var executor = new InterpretiveExecutor(_db, _vm);
+
+            Assert.Throws<ExecutionException>(() => executor.Execute(command));
+        }
     }
 }
