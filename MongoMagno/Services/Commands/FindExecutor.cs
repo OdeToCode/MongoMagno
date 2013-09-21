@@ -3,15 +3,17 @@ using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Services.Commands
 {
-    public class LimitExecutor : IOperatorExecutor
-    {        
-        public string Execute(CommandOperator op)
+    public class LimitExecutor : IApplyOperation
+    {
+        public MongoDbResults Apply(CommandOperator op, MongoDbResults result)
         {
-            return "temp";
+
+            //result.Cursor.Limit(op.Arguments);
+            return result;
         }
     }
 
-    public class FindExecutor : IOperatorExecutor
+    public class FindExecutor : IApplyOperation
     {
         private readonly IMongoDb _db;
 
@@ -21,10 +23,10 @@ namespace MongoMagno.Services.Commands
         }
 
 
-        public string Execute(CommandOperator op)
+        public MongoDbResults Apply(CommandOperator op, MongoDbResults result)
         {
-            var cursor = _db.Find(op.Arguments);
-            return "temp";
+            result.Cursor = _db.Find(op.Arguments);
+            return result;
         }
     }
 }

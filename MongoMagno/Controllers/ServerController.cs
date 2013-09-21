@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using AttributeRouting.Web.Http;
 using MongoMagno.Models;
@@ -33,12 +34,13 @@ namespace MongoMagno.Controllers
         }
 
         [POST("api/server/{server}/{database}")]
-        public ExecutionResult Execute(ClientCommand command)
+        public string Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);
             using (var executor = route.Executor)
             {
-                return executor.Execute(command);
+                throw new NotImplementedException();
+                return executor.Execute(command).ToString();
             }
         }          
     }

@@ -20,15 +20,15 @@ namespace MongoMagno.Services.Commands
             _commandMap = new InterpretiveCommandMap(_db);
         }
 
-        public ExecutionResult Execute(ClientCommand command)
+        public MongoDbResults Execute(ClientCommand command)
         {
             InitializeEnvironment(command);
-            var result = new ExecutionResult();
-            result.ParsedCommand = ParseCommand(command);
-            foreach (var option in result.ParsedCommand.Operators)
+            var result = new MongoDbResults();
+            result.ParsedCommands = ParseCommand(command);
+            foreach (var option in result.ParsedCommands.Operators)
             {
                 var executor = _commandMap.GetExecutorFor(option.Name);
-                result.Stuff = executor.Execute(option);            
+                result = executor.Apply(option, result);            
             }
             return result;
         }

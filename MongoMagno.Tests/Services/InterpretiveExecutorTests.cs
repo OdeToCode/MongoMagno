@@ -31,10 +31,10 @@ namespace MongoMagno.Tests.Services
             var executor = new InterpretiveExecutor(_db, _vm);
             var result = executor.Execute(command);
 
-            Assert.Equal(1, result.ParsedCommand.Operators.Count);
-            Assert.Equal("find", result.ParsedCommand.Operators[0].Name);
-            Assert.Equal(3, result.ParsedCommand.Operators[0].Arguments["0"].AsBsonDocument["x"].AsInt32);
-            Assert.Equal(1, result.ParsedCommand.Operators[0].Arguments["1"].AsBsonDocument["id"].AsInt32);
+            Assert.Equal(1, result.ParsedCommands.Operators.Count);
+            Assert.Equal("find", result.ParsedCommands.Operators[0].Name);
+            Assert.Equal(3, result.ParsedCommands.Operators[0].Arguments["0"].AsBsonDocument["x"].AsInt32);
+            Assert.Equal(1, result.ParsedCommands.Operators[0].Arguments["1"].AsBsonDocument["id"].AsInt32);
         }
 
         [Fact]
@@ -50,9 +50,9 @@ namespace MongoMagno.Tests.Services
             var executor = new InterpretiveExecutor(_db, _vm);
             var result = executor.Execute(command);
 
-            Assert.Equal(2, result.ParsedCommand.Operators.Count);
-            Assert.Equal("limit", result.ParsedCommand.Operators[1].Name);
-            Assert.Equal(10, result.ParsedCommand.Operators[1].Arguments["0"].AsInt32);
+            Assert.Equal(2, result.ParsedCommands.Operators.Count);
+            Assert.Equal("limit", result.ParsedCommands.Operators[1].Name);
+            Assert.Equal(10, result.ParsedCommands.Operators[1].Arguments["0"].AsInt32);
         }       
 
         [Fact]

@@ -167,7 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientCommand.cs" />
-    <Compile Include="Models\ExecutionResult.cs" />
+    <Compile Include="Services\Commands\MongoDbResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Commands\CommandExecutor.cs" />
     <Compile Include="Services\Commands\CommandMatchAttribute.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Services\Commands\IExecutorResolver.cs" />
     <Compile Include="Services\Commands\InterpretiveCommandMap.cs" />
     <Compile Include="Services\Commands\InterpretiveExecutor.cs" />
-    <Compile Include="Services\Commands\IOperatorExecutor.cs" />
+    <Compile Include="Services\Commands\IApplyOperation.cs" />
     <Compile Include="Services\Commands\ParsedCommand.cs" />
     <Compile Include="Services\IoC\IoC.cs" />
     <Compile Include="Services\IoC\StructureMapDependencyResolver.cs" />

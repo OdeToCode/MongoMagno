@@ -9,12 +9,12 @@ namespace MongoMagno.Services.Commands
         public InterpretiveCommandMap(IMongoDb db)
         {
             _db = db;
-            _map = new Dictionary<string, IOperatorExecutor>();
+            _map = new Dictionary<string, IApplyOperation>();
             _map.Add("find", new FindExecutor(_db));
             _map.Add("limit", new LimitExecutor());
         }
 
-        public IOperatorExecutor GetExecutorFor(string command)
+        public IApplyOperation GetExecutorFor(string command)
         {
             if (_map.ContainsKey(command))
             {
@@ -24,7 +24,7 @@ namespace MongoMagno.Services.Commands
         }
 
         readonly IMongoDb _db;
-        readonly Dictionary<string, IOperatorExecutor> _map;
+        readonly Dictionary<string, IApplyOperation> _map;
 
     }
 }
