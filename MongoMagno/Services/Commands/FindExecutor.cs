@@ -3,6 +3,14 @@ using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Services.Commands
 {
+    public class LimitExecutor : IOperatorExecutor
+    {        
+        public string Execute(CommandOperator op)
+        {
+            return "temp";
+        }
+    }
+
     public class FindExecutor : IOperatorExecutor
     {
         private readonly IMongoDb _db;

@@ -11,6 +11,7 @@ namespace MongoMagno.Services.Commands
             _db = db;
             _map = new Dictionary<string, IOperatorExecutor>();
             _map.Add("find", new FindExecutor(_db));
+            _map.Add("limit", new LimitExecutor());
         }
 
         public IOperatorExecutor GetExecutorFor(string command)

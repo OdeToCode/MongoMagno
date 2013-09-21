@@ -3,7 +3,7 @@
     var self = this;
     self.captures = [];
     self.collectionName = name;
-    var commands = ["find", "findOne", "limit", "orderBy"];
+    var commands = ["find", "limit"];
 
     for (var i = 0; i < commands.length; i++) {
         this[commands[i]] = function (commandName) {
