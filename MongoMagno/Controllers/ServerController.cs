@@ -34,13 +34,16 @@ namespace MongoMagno.Controllers
         }
 
         [POST("api/server/{server}/{database}")]
-        public string Execute(ClientCommand command)
+        public ServerResponse Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);
             using (var executor = route.Executor)
             {
-                throw new NotImplementedException();
-                return executor.Execute(command).ToString();
+                var dbResults = executor.Execute(command);
+                
+                var response = new ServerResponse();
+                response.Data = dbResults.Serialize();
+                return response;
             }
         }          
     }

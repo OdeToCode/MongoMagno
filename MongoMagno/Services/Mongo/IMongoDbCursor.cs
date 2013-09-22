@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace MongoMagno.Services.Mongo
 {
-    public interface IMongoDbCursor
+    public interface IMongoDbCursor : IEnumerable
     {
     }
 }

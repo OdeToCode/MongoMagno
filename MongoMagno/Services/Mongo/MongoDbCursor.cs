@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using System.Collections;
+using MongoDB.Driver;
 
 namespace MongoMagno.Services.Mongo
 {
@@ -9,6 +10,11 @@ namespace MongoMagno.Services.Mongo
         public MongoDbCursor(MongoCursor cursor)
         {
             _cursor = cursor;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable) _cursor).GetEnumerator();
         }
     }
 }

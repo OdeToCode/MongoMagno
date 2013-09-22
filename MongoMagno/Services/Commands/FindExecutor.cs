@@ -21,7 +21,6 @@ namespace MongoMagno.Services.Commands
             _db = db;
         }
 
-
         public MongoDbResults Apply(CommandOperator op, MongoDbResults result)
         {
             result.Cursor = _db.Find(op.Arguments);

@@ -26,13 +26,14 @@
                         </div>
                         <div class="span9" >                            
                             <div class="alert alert-error" ng-show="lastError">{{lastError}}</div>
-                            <!--data-ng-controller="CommandTextController"--> 
-                            <label>CommandText</label>
-                            <textarea rows="5" data-ng-model="command"></textarea>
-                            <button class="btn btn-primary" data-ng-click="execute()">Execute</button>
-                            <hr/>
-                            <label>Results</label>
-                            <div></div>
+                            <div data-ng-controller="CommandController" >
+                                <label>CommandText</label>
+                                <textarea rows="5" data-ng-model="command"></textarea>
+                                <button class="btn btn-primary" data-ng-click="execute()">Execute</button>
+                                <hr/>
+                                <label>Results</label>
+                                <div></div>
+                            </div>
                         </div>
                     </div>
                 </tab>
@@ -41,7 +42,7 @@
                         <i class="icon-plus-sign"></i>
                     </tab-heading>  
                 </tab>
-            </tabset>                      
+            </tabset>
         </div>
     </div>
 </div>

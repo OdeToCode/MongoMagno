@@ -1,4 +1,6 @@
-﻿using MongoMagno.Services.Mongo;
+﻿using System.Collections;
+using MongoMagno.Services.Mongo;
+using Newtonsoft.Json;
 
 namespace MongoMagno.Services.Commands
 {
@@ -6,5 +8,10 @@ namespace MongoMagno.Services.Commands
     {
         public ParsedCommand ParsedCommands { get; set; }
         public IMongoDbCursor Cursor { get; set; }
+        public string Serialize()
+        {
+            var enumerable = Cursor as IEnumerable;
+            return JsonConvert.SerializeObject(enumerable);
+        }     
     }
 }

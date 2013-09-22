@@ -43,7 +43,7 @@
         var getCollections = function() {
             mongoApiServer
                 .getCollections($scope.currentServer)
-                .then(setCollections);
+                .then(setCollections, setError);
         };
 
         var selectDatabase = function() {
