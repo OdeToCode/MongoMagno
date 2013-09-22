@@ -10,8 +10,8 @@
                             </div>
                             <div>                               
                                 <select data-ng-model="currentServer.currentDatabase"
-                                    data-ng-options="db for db in currentServer.databases"
-                                    data-ng-change="selectDatabase()" size="10">
+                                        data-ng-options="db for db in currentServer.databases"
+                                        data-ng-change="selectDatabase()" size="10">
                                 </select>
                             </div>
                             <div>
@@ -24,7 +24,9 @@
 
                             </div>
                         </div>
-                        <div class="span9" data-ng-controller="CommandTextController"> 
+                        <div class="span9" >                            
+                            <div class="alert alert-error" ng-show="lastError">{{lastError}}</div>
+                            <!--data-ng-controller="CommandTextController"--> 
                             <label>CommandText</label>
                             <textarea rows="5" data-ng-model="command"></textarea>
                             <button class="btn btn-primary" data-ng-click="execute()">Execute</button>

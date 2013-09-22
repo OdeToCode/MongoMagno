@@ -32,12 +32,14 @@
                 var opened;
                 var dialogDefer;
                 var httpBackend;
+                var errorMessage = { ExceptionMessage: "ERROR!" };
                 var fakeDialog = {
                     open: function () {
                         opened = true;
                         return dialogDefer.promise;
                     }  
                 };
+                
                 beforeEach(inject(function ($rootScope, $controller, $dialog, $q, mongoApiServer, $httpBackend) {
                     opened = false;
                     dialogDefer = $q.defer();
@@ -46,6 +48,7 @@
                     httpBackend = $httpBackend;
                     spyOn($dialog, "dialog").andReturn(fakeDialog);
                     $httpBackend.when("GET", "/api/server/fooserver").respond(["dba", "dbb", "dbc"]);
+                    $httpBackend.when("GET", "/api/server/badserver").respond(500, errorMessage);
                     $httpBackend.when("GET", "/api/server/fooserver/dba").respond(["c1", "c2", "c3"]);
 
                     $controller("WorkspaceController", {
@@ -76,7 +79,13 @@
                     scope.$apply(function () { dialogDefer.resolve(undefined); });
                     expect(scope.databases).toBe(undefined);
                 });
-                
+
+                it("should show an error when cannot connect to server", function () {
+                    scope.$apply(function () { dialogDefer.resolve({ name: "badserver" }); });
+                    httpBackend.flush();                                    
+                    expect(scope.lastError).toBe(errorMessage.ExceptionMessage);
+                });
+
             });
 
             describe("SelectServerController", function() {

@@ -25,8 +25,12 @@
                 $scope.workspace.name = $scope.currentServer.name;
                 mongoApiServer
                     .getDatabases($scope.currentServer)
-                    .then(setDatabases);
+                    .then(setDatabases, setError);
             }
+        };
+
+        var setError = function(error) {
+            $scope.lastError = error.data.ExceptionMessage;
         };
 
         var selectServer = function () {

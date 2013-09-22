@@ -1,5 +1,4 @@
-﻿using MongoMagno.Models;
-using MongoMagno.Services.Mongo;
+﻿using MongoMagno.Services.Mongo;
 
 namespace MongoMagno.Services.Commands
 {
