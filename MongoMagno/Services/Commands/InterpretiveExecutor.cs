@@ -63,6 +63,9 @@ namespace MongoMagno.Services.Commands
 
         void InitializeEnvironment(ClientCommand command)
         {
+            _db.Connect(command.Server);
+            _db.SetCurrentDatabase(command.Database);
+
             var collections = _db.GetCollections(command.Database).ToArray();
             _vm.CreateEnvironment(collections);
         }

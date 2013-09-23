@@ -6,17 +6,20 @@ namespace MongoMagno.Services.Mongo
 {
     public class MongoDb : IMongoDb
     {    
+       
         public void Connect(string server)
         {
-            var clientSettings = new MongoClientSettings();
-            clientSettings.Server = new MongoServerAddress(server);
-            
+            server.ThrowIfNull("server");
+
+            var clientSettings = new MongoClientSettings {Server = new MongoServerAddress(server)};
             var client = new MongoClient(clientSettings);
             _server = client.GetServer();
         }     
 
         public IMongoDbCursor Find(BsonDocument query)
-        {            
+        {
+            query.ThrowIfNull("query");
+
             var cursor = _collection.FindAs<BsonDocument>(new QueryDocument(query));
             return new MongoDbCursor(cursor);
         }
@@ -28,17 +31,23 @@ namespace MongoMagno.Services.Mongo
 
         public IEnumerable<string> GetCollections(string database)
         {
+            database.ThrowIfNull("database");
+
             var db = _server.GetDatabase(database);
             return db.GetCollectionNames();
         }
 
         public void SetCurrentCollection(string collectionName)
         {
+            collectionName.ThrowIfNull("collectionName");
+
             _collection = _database.GetCollection(collectionName);
         }
 
         public void SetCurrentDatabase(string databaseName)
         {
+            databaseName.ThrowIfNull("databaseName");
+
             _database = _server.GetDatabase(databaseName);
         }
 

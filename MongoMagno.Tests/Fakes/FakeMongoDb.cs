@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoMagno.Services.Mongo;
@@ -9,16 +10,24 @@ namespace MongoMagno.Tests.Fakes
     {
         public void Connect(string server)
         {
-            
+            CurrentServer = server;
         }
 
         public IEnumerable<string> GetDatabaseNames()
         {
+            if (CurrentServer == null)
+            {
+                throw new InvalidOperationException("Did not connect to server");
+            }
             return new[] {"dba", "dbb", "dbc"};
         }
 
         public IEnumerable<string> GetCollections(string database)
         {
+            if (CurrentDatabase == null)
+            {
+                throw new InvalidOperationException("Did not connect to database");
+            }
             return new[] {"collection_a", "collection_b"};
         }
 
@@ -32,12 +41,7 @@ namespace MongoMagno.Tests.Fakes
             CurrentCollection = collectionName;
         }
 
-        IMongoDbCursor IMongoDb.Find(BsonDocument query)
-        {
-            return null;
-        }
-
-        public IEnumerable Find(BsonDocument document)
+        public IMongoDbCursor Find(BsonDocument query)
         {
             return null;
         }
@@ -47,5 +51,6 @@ namespace MongoMagno.Tests.Fakes
         public string[] Collections = {"collection_a", "collection_b"};
         public string CurrentDatabase;
         public string CurrentCollection;
+        public string CurrentServer { get; set; }
     }
 }

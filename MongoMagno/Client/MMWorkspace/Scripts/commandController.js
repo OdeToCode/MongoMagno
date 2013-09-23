@@ -6,10 +6,14 @@
         $scope.command = "";
 
         $scope.execute = function() {
-            mongoApiServer.execute($scope.currentServer, $scope.command);
-
+            mongoApiServer.execute($scope.currentServer, $scope.command)
+                          .then(setResults, $scope.setError);
         };
-       
+
+        var setResults = function(results) {
+            $scope.executionResults = results;
+        };
+
     };
 
     CommandController.$inject = ["$scope", "mongoApiServer"];

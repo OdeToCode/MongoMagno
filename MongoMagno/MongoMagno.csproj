@@ -192,6 +192,7 @@
     <Compile Include="Services\Routing\CommandRouter.cs" />
     <Compile Include="Services\Routing\RouteMatchResult.cs" />
     <Compile Include="Services\Routing\RouteMatchTokens.cs" />
+    <Compile Include="Validation\Check.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\MMWorkspace\Scripts\commandController.js" />

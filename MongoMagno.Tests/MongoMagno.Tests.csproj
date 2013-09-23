@@ -138,6 +138,7 @@
     <Compile Include="Services\InterpretiveCommandMapTests.cs" />
     <Compile Include="Services\InterpretiveExecutorTests.cs" />
     <Compile Include="Services\JavaScriptMachineTests.cs" />
+    <Compile Include="Services\MongoDbTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
