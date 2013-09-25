@@ -9,7 +9,7 @@ namespace MongoMagno.Services.Mongo
        
         public void Connect(string server)
         {
-            server.ThrowIfNull("server");
+           Check.ArgNotNull(server, "server");
 
             var clientSettings = new MongoClientSettings {Server = new MongoServerAddress(server)};
             var client = new MongoClient(clientSettings);
@@ -18,7 +18,8 @@ namespace MongoMagno.Services.Mongo
 
         public IMongoDbCursor Find(BsonDocument query)
         {
-            query.ThrowIfNull("query");
+            Check.ArgNotNull(query, "query");
+            Check.NotNull(_collection, "_collection");
 
             var cursor = _collection.FindAs<BsonDocument>(new QueryDocument(query));
             return new MongoDbCursor(cursor);
@@ -26,12 +27,15 @@ namespace MongoMagno.Services.Mongo
 
         public IEnumerable<string> GetDatabaseNames()
         {
+            Check.NotNull(_server, "_server");
+
             return _server.GetDatabaseNames();
         }
 
         public IEnumerable<string> GetCollections(string database)
-        {
-            database.ThrowIfNull("database");
+        {           
+            Check.ArgNotNull(database, "database");
+            Check.NotNull(_server, "server");
 
             var db = _server.GetDatabase(database);
             return db.GetCollectionNames();
@@ -39,14 +43,16 @@ namespace MongoMagno.Services.Mongo
 
         public void SetCurrentCollection(string collectionName)
         {
-            collectionName.ThrowIfNull("collectionName");
+            Check.ArgNotNull(collectionName, "collectionName");
+            Check.NotNull(_server, "_server");;
 
             _collection = _database.GetCollection(collectionName);
         }
 
         public void SetCurrentDatabase(string databaseName)
         {
-            databaseName.ThrowIfNull("databaseName");
+            Check.ArgNotNull(databaseName, "databaseName");
+            Check.NotNull(_server, "_server");
 
             _database = _server.GetDatabase(databaseName);
         }

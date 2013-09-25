@@ -168,9 +168,10 @@
     </Compile>
     <Compile Include="Models\ClientCommand.cs" />
     <Compile Include="Models\ServerResponse.cs" />
+    <Compile Include="Services\Commands\LimitExecutor.cs" />
     <Compile Include="Services\Commands\MongoDbResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Commands\CommandExecutor.cs" />
+    <Compile Include="Services\Commands\ICommandExecutor.cs" />
     <Compile Include="Services\Commands\CommandMatchAttribute.cs" />
     <Compile Include="Services\Commands\CommandOperator.cs" />
     <Compile Include="Services\Commands\CommandRouteContainer.cs" />

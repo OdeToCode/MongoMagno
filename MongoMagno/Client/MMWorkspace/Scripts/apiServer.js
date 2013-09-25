@@ -26,9 +26,14 @@
         };
 
         var execute = function(server, command) {
-            var url = "{0}/server/{1}/{2}".format(apiRootUrl, server.name, server.currentDatabase);
+            var url = "{0}/server".format(apiRootUrl);
+            var data = {
+                server: server.name,
+                database: server.currentDatabase,
+                commandText: command
+            };
             var headers = getHeaders(server);
-            return $http.post(url, { command: command }, { headers: headers });
+            return $http.post(url, data, { headers: headers });
         };
 
         return {

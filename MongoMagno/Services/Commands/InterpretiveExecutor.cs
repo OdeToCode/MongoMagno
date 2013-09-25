@@ -8,11 +8,7 @@ using MongoMagno.Services.Mongo;
 namespace MongoMagno.Services.Commands
 {
     public class InterpretiveExecutor : ICommandExecutor
-    {
-        private readonly IMongoDb _db;
-        private readonly IJavaScriptMachine _vm;
-        private readonly InterpretiveCommandMap _commandMap;
-
+    {       
         public InterpretiveExecutor(IMongoDb db, IJavaScriptMachine vm)
         {
             _db = db;
@@ -22,15 +18,48 @@ namespace MongoMagno.Services.Commands
 
         public MongoDbResults Execute(ClientCommand command)
         {
-            InitializeEnvironment(command);
-            var result = new MongoDbResults();
-            result.ParsedCommands = ParseCommand(command);
+            InitializeDb(command);
+            InitializeJvm(command);
+            return ExecuteCommand(command);
+        }
+
+        private void InitializeDb(ClientCommand command)
+        {
+            _db.Connect(command.Server);
+            _db.SetCurrentDatabase(command.Database);
+        }
+
+        MongoDbResults ExecuteCommand(ClientCommand command)
+        {
+            var result = Parse(command);            
+            return Execute(result);
+        }
+
+        private MongoDbResults Execute(MongoDbResults result)
+        {
             foreach (var option in result.ParsedCommands.Operators)
             {
                 var executor = _commandMap.GetExecutorFor(option.Name);
-                result = executor.Apply(option, result);            
+                result = executor.Apply(option, result);
             }
             return result;
+        }
+
+        private MongoDbResults Parse(ClientCommand command)
+        {
+            var result = new MongoDbResults();
+            result.ParsedCommands = ParseCommand(command);
+            result.Server = command.Server;
+            result.Database = command.Database;
+            result.Collection = result.ParsedCommands.Collection;
+            _db.SetCurrentCollection(result.ParsedCommands.Collection);
+            return result;
+        }
+
+        void InitializeJvm(ClientCommand command)
+        {           
+            var collections = _db.GetCollections(command.Database).ToArray();
+            _vm.CreateEnvironment(collections);
         }
 
         ParsedCommand ParseCommand(ClientCommand command)
@@ -45,7 +74,6 @@ namespace MongoMagno.Services.Commands
                 parsed.Operators.Add(option);
             }
 
-
             return parsed;
         }
 
@@ -59,20 +87,15 @@ namespace MongoMagno.Services.Commands
             {
                 throw new ExecutionException(ex);
             }
-        }
-
-        void InitializeEnvironment(ClientCommand command)
-        {
-            _db.Connect(command.Server);
-            _db.SetCurrentDatabase(command.Database);
-
-            var collections = _db.GetCollections(command.Database).ToArray();
-            _vm.CreateEnvironment(collections);
-        }
+        }    
 
         public void Dispose()
         {
             _vm.Dispose();
         }
+
+        readonly IMongoDb _db;
+        readonly IJavaScriptMachine _vm;
+        readonly InterpretiveCommandMap _commandMap;
     }
 }

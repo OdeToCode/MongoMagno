@@ -2,16 +2,6 @@
 
 namespace MongoMagno.Services.Commands
 {
-    public class LimitExecutor : IApplyOperation
-    {
-        public MongoDbResults Apply(CommandOperator op, MongoDbResults result)
-        {
-
-            //result.Cursor.Limit(op.Arguments);
-            return result;
-        }
-    }
-
     public class FindExecutor : IApplyOperation
     {
         private readonly IMongoDb _db;
@@ -22,7 +12,7 @@ namespace MongoMagno.Services.Commands
         }
 
         public MongoDbResults Apply(CommandOperator op, MongoDbResults result)
-        {
+        {                     
             result.Cursor = _db.Find(op.Arguments);
             return result;
         }

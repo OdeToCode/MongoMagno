@@ -33,7 +33,7 @@ namespace MongoMagno.Controllers
             return _db.GetCollections(database);
         }
 
-        [POST("api/server/{server}/{database}")]
+        [POST("api/server")]
         public ServerResponse Execute(ClientCommand command)
         {
             var route = _router.FindRouteForCommand(command);
