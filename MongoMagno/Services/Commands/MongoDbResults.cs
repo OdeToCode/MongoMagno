@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoMagno.Services.Mongo;
 using Newtonsoft.Json;
 
@@ -14,8 +16,12 @@ namespace MongoMagno.Services.Commands
 
         public string Serialize()
         {
-            var enumerable = Cursor as IEnumerable;
-            return JsonConvert.SerializeObject(enumerable);
+            var array = new BsonArray();
+            foreach (var record in Cursor)
+            {                
+                array.Add(record as BsonDocument);
+            }
+            return array.ToJson();
         }     
     }
 }
