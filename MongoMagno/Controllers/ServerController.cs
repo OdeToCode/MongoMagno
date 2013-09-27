@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using AttributeRouting.Web.Http;
 using MongoMagno.Models;
@@ -42,7 +41,7 @@ namespace MongoMagno.Controllers
                 var dbResults = executor.Execute(command);
                 
                 var response = new ServerResponse();
-                response.Data = dbResults.Serialize();
+                response.Data = dbResults.Cursor;
                 return response;
             }
         }          

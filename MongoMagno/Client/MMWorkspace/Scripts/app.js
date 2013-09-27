@@ -14,3 +14,7 @@
 
 }());
 
+window.ObjectId = function(value) {
+    return value;
+};
+

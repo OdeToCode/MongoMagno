@@ -13,7 +13,14 @@
         };
 
         $scope.setError = function (error) {
-            $scope.lastError = error.data.ExceptionMessage;
+            if (error.data && error.data.ExceptionMessage) {
+                $scope.lastError = error.data.ExceptionMessage;
+            }
+            else if (error.message) {
+                $scope.lastError = error.message;
+            } else {
+                $scope.lastError = "An error occured in the last request";
+            }
         };
     };
 
