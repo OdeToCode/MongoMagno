@@ -198,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\MMWorkspace\Scripts\commandController.js" />
+    <Content Include="Client\MMWorkspace\Scripts\jsonResultsDirective.js" />
     <Content Include="Client\MMWorkspace\Scripts\workspaceController.js" />
     <Content Include="Client\MMWorkspace\Views\main.html" />
     <Content Include="Content\bootstrap.css" />

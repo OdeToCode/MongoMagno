@@ -15,10 +15,7 @@ namespace MongoMagno.Services.Mongo
 
             foreach (BsonDocument record in cursor)
             {
-                //writer.WriteRawValue(record.ToJson());
-                serializer.Serialize(writer, record.ToDictionary());
-                    
-                    
+                serializer.Serialize(writer, record.ToDictionary());                                        
             }
 
             writer.WriteEndArray();
@@ -32,7 +29,6 @@ namespace MongoMagno.Services.Mongo
         public override bool CanConvert(Type objectType)
         {
             var types = new[] {typeof (MongoDbCursor)};
-
             return types.Any(t => t == objectType);
         }
     }
