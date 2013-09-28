@@ -15,7 +15,10 @@ namespace MongoMagno.Services.Mongo
 
             foreach (BsonDocument record in cursor)
             {
-                writer.WriteRawValue(record.ToJson());
+                //writer.WriteRawValue(record.ToJson());
+                serializer.Serialize(writer, record.ToDictionary());
+                    
+                    
             }
 
             writer.WriteEndArray();
