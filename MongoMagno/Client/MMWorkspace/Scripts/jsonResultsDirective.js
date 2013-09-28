@@ -8,7 +8,7 @@
             replace: true,
             link: function(scope, element, attributes) {
                 scope.$watch(attributes.value, function (newValue) {
-                    element.html(JSON.stringify(newValue));
+                    element.html(JSON.stringify(newValue, null, "  "));
                 });
             }
         };
