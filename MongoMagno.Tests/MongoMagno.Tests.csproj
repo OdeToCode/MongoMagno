@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fakes\FakeExecutorResolver.cs" />
+    <Compile Include="Fakes\FakeMongoCursor.cs" />
     <Compile Include="Fakes\FakeMongoDb.cs" />
     <Compile Include="MongoExperiments\Commands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Services\InterpretiveCommandMapTests.cs" />
     <Compile Include="Services\InterpretiveExecutorTests.cs" />
     <Compile Include="Services\JavaScriptMachineTests.cs" />
+    <Compile Include="Services\LimitExecutorTests.cs" />
     <Compile Include="Services\MongoDbTests.cs" />
   </ItemGroup>
   <ItemGroup>

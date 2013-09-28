@@ -36,25 +36,7 @@ namespace MongoMagno.Tests.Services
             Assert.Equal(3, result.ParsedCommands.Operators[0].Arguments["0"].AsBsonDocument["x"].AsInt32);
             Assert.Equal(1, result.ParsedCommands.Operators[0].Arguments["1"].AsBsonDocument["id"].AsInt32);
         }
-
-        [Fact]
-        public void Can_Execute_Limit_Query()
-        {
-            var command = new ClientCommand
-            {
-                Server = "localhost",
-                Database = "test",
-                CommandText = "db.collection_a.find({x:3}, {id:1}).limit(10)"
-            };
-
-            var executor = new InterpretiveExecutor(_db, _vm);
-            var result = executor.Execute(command);
-
-            Assert.Equal(2, result.ParsedCommands.Operators.Count);
-            Assert.Equal("limit", result.ParsedCommands.Operators[1].Name);
-            Assert.Equal(10, result.ParsedCommands.Operators[1].Arguments["0"].AsInt32);
-        }       
-
+   
         [Fact]
         public void Throws_When_Syntax_Is_Bad()
         {

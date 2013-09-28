@@ -16,5 +16,11 @@ namespace MongoMagno.Services.Mongo
         {
             return ((IEnumerable) _cursor).GetEnumerator();
         }
+
+        public IMongoDbCursor Limit(int limit)
+        {
+            _cursor.Limit = limit;
+            return this;
+        }
     }
 }
