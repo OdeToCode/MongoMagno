@@ -189,7 +189,7 @@
     <Compile Include="Services\JsVm\JavaScriptMachine.cs" />
     <Compile Include="Services\Mongo\IMongoDbCursor.cs" />
     <Compile Include="Services\Mongo\IMongoDb.cs" />
-    <Compile Include="Services\Mongo\MongoCursorSerializer.cs" />
+    <Compile Include="Services\Mongo\MongoCursorJsonConverter.cs" />
     <Compile Include="Services\Mongo\MongoDbCursor.cs" />
     <Compile Include="Services\Mongo\MongoDb.cs" />
     <Compile Include="Services\Routing\CommandRouter.cs" />

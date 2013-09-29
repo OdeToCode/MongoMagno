@@ -19,7 +19,7 @@ namespace MongoMagno
             var jsonFormatter = formatters.JsonFormatter;
             var settings = jsonFormatter.SerializerSettings;
 
-            jsonFormatter.SerializerSettings.Converters.Add(new MongoCursorSerializer());
+            jsonFormatter.SerializerSettings.Converters.Add(new MongoCursorJsonConverter());
             settings.Formatting = Formatting.Indented;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
